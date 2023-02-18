@@ -32,8 +32,8 @@ class _MyAppState extends State<MyApp> {
         //initialRoute: WeatherPage.route,
         onGenerateRoute: router.generateRoute,
         //home: const WeatherPage(),
-        //home: const HomeMain(),
-        home: const LoginPage(),
+        home: const HomeMain(),
+        //home: const LoginPage(),
       ),
     );
   }
