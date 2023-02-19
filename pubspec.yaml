@@ -42,6 +42,8 @@ dependencies:
   formz: ^0.4.1
   get_it: ^7.2.0
   http: ^0.13.5
+  path: ^1.8.3
+  path_provider: ^2.0.12
   rxdart: ^0.27.7
   shared_preferences: ^2.0.17
   smooth_page_indicator: ^1.0.1
