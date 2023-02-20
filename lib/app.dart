@@ -9,6 +9,7 @@ import 'di/injection.dart' as di;
 import 'config/routes.dart' as router;
 import 'feature/login/presentation/bloc/login/login_bloc.dart';
 import '/feature/balance/presentation/pages/balance_page.dart';
+import 'size_config.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);

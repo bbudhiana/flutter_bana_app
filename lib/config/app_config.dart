@@ -11,11 +11,11 @@ class ConfigEnvironment {
       case Environment.trial:
         _config = _Config.trialConstant;
         break;
-      case Environment.dev:
+        /*  case Environment.dev:
         _config = _Config.developmentConstant;
         break;
       case Environment.production:
-        _config = _Config.productionConstant;
+        _config = _Config.productionConstant; */
         break;
     }
   }
@@ -43,18 +43,6 @@ class _Config {
     url: "https://api.openweathermap.org/data/2.5",
     authURL: "https://reqres.in/api/login",
     buildFlavorType: BuildFlavorType.trial,
-  };
-
-  static Map<String, dynamic> developmentConstant = {
-    url: "https://devbe.bahaso.com/api",
-    authURL: "https://devbe.bahaso.com/api",
-    buildFlavorType: BuildFlavorType.dev
-  };
-
-  static Map<String, dynamic> productionConstant = {
-    url: "https://bahaso.com/api",
-    authURL: "https://bahaso.com/api",
-    buildFlavorType: BuildFlavorType.production
   };
 }
 

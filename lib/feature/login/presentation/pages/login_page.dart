@@ -1,3 +1,4 @@
+import '../../../../size_config.dart';
 import '/config/app_theme.dart';
 import '/core/responsive.dart';
 import '/util/images.dart';
@@ -18,6 +19,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return WillPopScope(
       onWillPop: () {
         return Future<bool>.value(true);

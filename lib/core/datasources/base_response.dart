@@ -1,4 +1,5 @@
 import '../../feature/login/domain/entities/login.dart';
+import '../../feature/user/domain/entities/user.dart';
 import '/core/entities/base_entity.dart';
 /* import '../feature/login/domain/entities/login.dart';
 import '../feature/register/domain/entities/register.dart'; */
