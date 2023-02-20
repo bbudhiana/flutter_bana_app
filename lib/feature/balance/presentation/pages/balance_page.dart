@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../../../size_config.dart';
+import '../../../home/presentasion/pages/components/home_header.dart';
+
 class BalancePage extends StatefulWidget {
   const BalancePage({super.key});
 
@@ -10,12 +13,16 @@ class BalancePage extends StatefulWidget {
 class _BalancePageState extends State<BalancePage> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: const [
-          Padding(padding: EdgeInsets.only(top: 39)),
-          Text('test'),
-        ],
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Text('test')
+            //SizedBox(height: getProportionateScreenWidth(20)),
+            //const HomeHeader(),
+            //SizedBox(height: getProportionateScreenWidth(30)),
+          ],
+        ),
       ),
     );
   }
