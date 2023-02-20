@@ -14,6 +14,7 @@ class _BalancePageState extends State<BalancePage> {
       child: Column(
         children: const [
           Padding(padding: EdgeInsets.only(top: 39)),
+          Text('test'),
         ],
       ),
     );

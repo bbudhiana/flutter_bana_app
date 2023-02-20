@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:flutter_bana_app/feature/login/data/datasources/login_remote_data_source%20sqlite.dart';
+
 import '/feature/login/data/models/login_model.dart';
 import 'package:dartz/dartz.dart';
 import '/feature/login/data/datasources/login_remote_data_source.dart';
@@ -9,7 +11,7 @@ import '/util/exception.dart';
 import '/util/failure.dart';
 
 class LoginRepositoryImpl implements LoginRepository {
-  final LoginRemoteDataSource remoteDataSource;
+  final LoginRemoteDataSourceSqlite remoteDataSource;
 
   LoginRepositoryImpl({required this.remoteDataSource});
 
@@ -17,8 +19,12 @@ class LoginRepositoryImpl implements LoginRepository {
   Future<Either<Failure, Login>> getAuthentication(
       String email, String password) async {
     dynamic result;
+
     try {
       result = await remoteDataSource.getAuthentication(email, password);
+      if (result.loginEntity().data == null) {
+        return const Left(DataFailure("Login Failed"));
+      }
       return Right(result.loginEntity());
     } on FetchDataException {
       return Left(ServerFailure(result.message.toString()));

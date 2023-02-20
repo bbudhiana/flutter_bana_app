@@ -71,7 +71,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           sharedPreferences.setBool("islogin", data.code != 200 ? false : true);
           emit(state.copyWith(
               status: FormzStatus.submissionSuccess,
-              responseMessage: data.message,
+              //responseMessage: data.message,
+              responseMessage: 'Login Success',
               loginSuccess: data.code != 200 ? false : true));
         },
       );

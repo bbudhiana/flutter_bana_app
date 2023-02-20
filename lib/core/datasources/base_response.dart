@@ -1,3 +1,4 @@
+import '../../feature/login/domain/entities/login.dart';
 import '/core/entities/base_entity.dart';
 /* import '../feature/login/domain/entities/login.dart';
 import '../feature/register/domain/entities/register.dart'; */
@@ -32,8 +33,9 @@ class BaseResponse {
       };
 
   /* Register toEntity() => Register(
-      code: code, status: status, message: message, data: data, error: error);
-  Login loginEntity() => Login(code: code, message: message, data: data); */
+      code: code, status: status, message: message, data: data, error: error); */
+
+  Login loginEntity() => Login(code: code, message: message, data: data);
 
   BaseEntity baseEntity() => BaseEntity(
       code: code, status: status, message: message, data: data, error: error);

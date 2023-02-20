@@ -19,7 +19,10 @@ class LoginWidget extends StatelessWidget {
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
               ..showSnackBar(
-                SnackBar(content: Text(state.responseMessage)),
+                SnackBar(
+                  content: Text(state.responseMessage),
+                  backgroundColor: Color.fromARGB(255, 211, 45, 23),
+                ),
               );
           } else if (state.status.isSubmissionSuccess) {
             ScaffoldMessenger.of(context)
@@ -76,7 +79,7 @@ class _EmailInput extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                "Email",
+                "Username",
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
                   color: state.email.invalid
@@ -97,7 +100,7 @@ class _EmailInput extends StatelessWidget {
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: SharedColors.homerBankWhiteColor,
-                  hintText: "Enter your email",
+                  hintText: "alice or bob",
                   hintStyle: const TextStyle(
                       color: SharedColors.homerBankGreyColor,
                       fontSize: 14,
@@ -156,9 +159,9 @@ class _EmailInput extends StatelessWidget {
   String _getErrorEmail(EmailValidationError? err) {
     switch (err) {
       case EmailValidationError.empty:
-        return "email can\'t be empty";
+        return "user can\'t be empty";
       case EmailValidationError.invalid:
-        return "email invalid";
+        return "user invalid";
       default:
         return "";
     }
@@ -203,7 +206,7 @@ class _PasswordInput extends StatelessWidget {
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white70,
-                  hintText: "Enter your password",
+                  hintText: "alice123 or bob123",
                   hintStyle: const TextStyle(
                       color: SharedColors.homerBankGreyColor, fontSize: 14),
                   contentPadding: const EdgeInsets.symmetric(

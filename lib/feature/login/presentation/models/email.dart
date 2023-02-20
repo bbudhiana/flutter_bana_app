@@ -6,14 +6,14 @@ class Email extends FormzInput<String, EmailValidationError> {
   const Email.pure() : super.pure('');
   const Email.dirty([String value = '']) : super.dirty(value);
 
-  static final  _emailRegExp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+  //static final  _emailRegExp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 
   @override
   EmailValidationError? validator(String? value) {
-    if(value!.isEmpty){
+    if (value!.isEmpty) {
       return EmailValidationError.empty;
     }
 
-    return _emailRegExp.hasMatch(value) ? null : EmailValidationError.invalid;
+    //return _emailRegExp.hasMatch(value) ? null : EmailValidationError.invalid;
   }
 }
