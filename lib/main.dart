@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bana_app/feature/user/data/models/user_model.dart';
-import 'package:flutter_bana_app/util/datasource/query/user_query.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:path/path.dart';
-import 'package:sqflite/sqflite.dart';
 
 import 'app.dart';
 import 'config/app_config.dart';
 import 'di/injection.dart' as di;
-import 'feature/user/domain/entities/user.dart';
-import 'util/datasource/db_helper.dart';
 
 void main() async {
   ConfigEnvironment.setEnvironment(Environment.trial);

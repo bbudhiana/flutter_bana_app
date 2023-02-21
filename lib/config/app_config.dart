@@ -11,12 +11,12 @@ class ConfigEnvironment {
       case Environment.trial:
         _config = _Config.trialConstant;
         break;
-        /*  case Environment.dev:
+      /*  case Environment.dev:
         _config = _Config.developmentConstant;
         break;
       case Environment.production:
-        _config = _Config.productionConstant; */
-        break;
+        _config = _Config.productionConstant; 
+        break;*/
     }
   }
 
