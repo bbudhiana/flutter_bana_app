@@ -7,6 +7,7 @@ abstract class WeatherEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+//Event ketika terjadi perubahan input city di widget, terima parameter cityName
 class OnCityChanged extends WeatherEvent {
   final String cityName;
 

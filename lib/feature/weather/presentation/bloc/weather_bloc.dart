@@ -7,6 +7,7 @@ import 'package:rxdart/rxdart.dart';
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   final GetCurrentWeather _getCurrentWeather;
 
+  //Bloc WeatherBloc terima USECASE get_current_weather utuk akses data
   WeatherBloc(this._getCurrentWeather) : super(WeatherEmpty()) {
     on<OnCityChanged>(
       (event, emit) async {

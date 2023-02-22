@@ -8,10 +8,13 @@ abstract class WeatherState extends Equatable {
   List<Object?> get props => [];
 }
 
+//State ketika object weather kosong
 class WeatherEmpty extends WeatherState {}
 
+//State ketika object weather sedang diload
 class WeatherLoading extends WeatherState {}
 
+//State ketika object weather ouput nya error, tangkap error nya dalam message
 class WeatherError extends WeatherState {
   final String message;
 
@@ -21,6 +24,7 @@ class WeatherError extends WeatherState {
   List<Object?> get props => [message];
 }
 
+//State ketika object weather berhasil, outpunya adalah kelas weather
 class WeatherHasData extends WeatherState {
   final Weather result;
 

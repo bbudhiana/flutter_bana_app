@@ -32,9 +32,9 @@ class _MyAppState extends State<MyApp> {
         theme: AppTheme.light,
         //initialRoute: WeatherPage.route,
         onGenerateRoute: router.generateRoute,
-        //home: const WeatherPage(),
+        home: const WeatherPage(),
         //home: const HomeMain(),
-        home: const LoginPage(),
+        //home: const LoginPage(),
       ),
     );
   }

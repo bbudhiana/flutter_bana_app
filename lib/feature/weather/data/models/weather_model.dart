@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 
 import '../../domain/entities/weather.dart';
 
+//Data model adalah mapping dari source data ke Object Output, misal WeatherModel
 class WeatherModel extends Equatable {
   const WeatherModel({
     required this.cityName,
@@ -47,6 +48,7 @@ class WeatherModel extends Equatable {
         'name': cityName,
       };
 
+  //Fungsi ini penting untuk konversi mapping object Data Model kembali ke Object Entity
   Weather toEntity() => Weather(
         cityName: cityName,
         main: main,
