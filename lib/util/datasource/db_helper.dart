@@ -73,7 +73,13 @@ class DbHelper {
     final db = await openDB();
     var result = await db.rawQuery(
         "select * from users where name='$name' and password='$password'");
-    return result.isNotEmpty ? result.toList().first : {};
+    return result.isNotEmpty ? result.first : {};
+  }
+
+  Future<Map<String, Object?>> getCurrentUser(String name) async {
+    final db = await openDB();
+    var result = await db.rawQuery("select * from users where name='$name'");
+    return result.isNotEmpty ? result.first : {};
   }
 
   Future<Map<String, Object?>> getDataUserByNameAndPassword2(
@@ -81,7 +87,7 @@ class DbHelper {
     final db = await openDB();
     var result = await db.rawQuery(
         "select * from users where name='$name' and password='$password'");
-    return result.isNotEmpty ? result.toList().first : {};
+    return result.isNotEmpty ? result.first : {};
   }
 
   Future<String> dropTable(String dropTable) async {

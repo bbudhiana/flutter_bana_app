@@ -1,25 +1,38 @@
 import 'dart:convert';
 
-import '/config/app_config.dart';
+import '../../../../util/datasource/db_helper.dart';
 import '/util/exception.dart';
-import '../models/weather_model.dart';
+import '../models/user_model.dart';
 import 'package:http/http.dart' as http;
 
 abstract class RemoteDataSource {
-  Future<WeatherModel> getCurrentWeather(String cityName);
+  Future<UserModel> getUserByNameAndPassword(String name, String password);
+  Future<UserModel> getCurrentUser(String name);
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
   final http.Client client;
+  DbHelper helper = DbHelper();
   RemoteDataSourceImpl({required this.client});
 
   @override
-  Future<WeatherModel> getCurrentWeather(String cityName) async {
-    final response = await client
-        .get(Uri.parse(ConfigEnvironment.currentWeatherByName(cityName)));
+  Future<UserModel> getUserByNameAndPassword(
+      String name, String password) async {
+    final response = await helper.getDataUserByNameAndPassword2(name, password);
 
-    if (response.statusCode == 200) {
-      return WeatherModel.fromJson(json.decode(response.body));
+    if (response.isNotEmpty) {
+      return UserModel.fromJson(json.decode(response.toString()));
+    } else {
+      throw FetchDataException();
+    }
+  }
+
+  @override
+  Future<UserModel> getCurrentUser(String name) async {
+    final response = await helper.getCurrentUser(name);
+
+    if (response.isNotEmpty) {
+      return UserModel.fromJson(json.decode(response.toString()));
     } else {
       throw FetchDataException();
     }
