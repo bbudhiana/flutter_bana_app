@@ -1,3 +1,7 @@
+import 'package:flutter_bana_app/feature/authentication/domain/repositories/auth_repository.dart';
+
+import '../feature/authentication/data/datasources/auth_remote_data_source.dart';
+import '../feature/authentication/data/repositories/auth_repository_impl.dart';
 import '../feature/login/data/datasources/login_remote_data_source sqlite.dart';
 import '../feature/login/data/datasources/login_remote_data_source.dart';
 import '../feature/login/data/repositories/login_repository_impl.dart';
@@ -51,6 +55,14 @@ void init() async {
 
   locator.registerLazySingleton<LoginRemoteDataSourceSqlite>(
     () => LoginRemoteDataSourceSqliteImpl(),
+  );
+
+  locator.registerLazySingleton<AuthRepository>(
+    () => AuthRepositoryImpl(remoteDataSource: locator()),
+  );
+
+  locator.registerLazySingleton<AuthRemoteDataSource>(
+    () => AuthRemoteDataSourceImpl(),
   );
 
   locator.registerLazySingleton(() => http.Client());
