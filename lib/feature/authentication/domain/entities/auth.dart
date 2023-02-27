@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+enum AuthenticationStatus { unknown, authenticated, unauthenticated }
+
 class Auth extends Equatable {
   final AuthenticationStatus status;
 

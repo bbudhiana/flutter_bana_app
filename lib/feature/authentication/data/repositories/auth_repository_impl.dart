@@ -1,13 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter_bana_app/util/failure.dart';
-
-import 'package:flutter_bana_app/feature/authentication/domain/entities/auth.dart';
-
-import 'package:dartz/dartz.dart';
-
 import '../../../../util/exception.dart';
+import '../../domain/entities/auth.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../datasources/auth_remote_data_source.dart';
 

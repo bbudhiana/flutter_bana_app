@@ -20,4 +20,6 @@ class User extends Equatable {
         password,
         amount,
       ];
+
+  static const empty = User(id: 0, name: '-', password: '-', amount: 0);
 }

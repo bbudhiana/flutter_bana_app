@@ -8,7 +8,7 @@ class GetCurrentUser {
 
   GetCurrentUser(this.repository);
 
-  Future<Either<Failure, User>> execute(String name) {
-    return repository.getCurrentUser(name);
+  Future<Either<Failure, User>> execute() {
+    return repository.getCurrentUser();
   }
 }

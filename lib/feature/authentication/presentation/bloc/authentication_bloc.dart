@@ -2,9 +2,12 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_bana_app/feature/authentication/domain/repositories/auth_repository.dart';
 
+import '../../../user/domain/entities/user.dart';
+import '../../../user/domain/repositories/user_repository.dart';
+import '../../../user/presentation/bloc/user_bloc.dart';
 import '../../domain/entities/auth.dart';
+import '../../domain/repositories/auth_repository.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';
@@ -62,11 +65,25 @@ class AuthenticationBloc
     //misal ambil data dari sharedPreference yaitu name and password
     //kemudian ambil data dari user repository getUserByNameAndPassword
     try {
-      final user = await _userRepository.getUser();
-      return user;
+      final result = await _userRepository.getCurrentUser();
+      result.fold(
+        (failure) {
+          return null;
+        },
+        (data) {
+          return data;
+        },
+      );
     } catch (_) {
       return null;
     }
+
+    /*  try {
+      final user = await _userRepository.getCurrentUser();
+      return Right(user);
+    } catch (_) {
+      return null;
+    } */
   }
 
   void _onAuthenticationLogoutRequested(

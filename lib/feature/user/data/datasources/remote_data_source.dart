@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 
 abstract class RemoteDataSource {
   Future<UserModel> getUserByNameAndPassword(String name, String password);
-  Future<UserModel> getCurrentUser(String name);
+  Future<UserModel> getCurrentUser();
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -28,7 +28,8 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   }
 
   @override
-  Future<UserModel> getCurrentUser(String name) async {
+  Future<UserModel> getCurrentUser() async {
+    String name = "alice";
     final response = await helper.getCurrentUser(name);
 
     if (response.isNotEmpty) {

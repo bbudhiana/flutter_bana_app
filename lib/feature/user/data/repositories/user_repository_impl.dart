@@ -18,9 +18,9 @@ class UserRepositoryImpl implements UserRepository {
   UserRepositoryImpl({required this.remoteDataSource});
 
   @override
-  Future<Either<Failure, User>> getCurrentUser(String name) async {
+  Future<Either<Failure, User>> getCurrentUser() async {
     try {
-      final result = await remoteDataSource.getCurrentUser(name);
+      final result = await remoteDataSource.getCurrentUser();
 
       //return berupa Weather Data Model maka harus konversi ke Weather Entity Model
       return Right(result.toEntity());
