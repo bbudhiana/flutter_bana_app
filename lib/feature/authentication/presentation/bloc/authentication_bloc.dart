@@ -77,6 +77,7 @@ class AuthenticationBloc
     } catch (_) {
       return null;
     }
+    return null;
 
     /*  try {
       final user = await _userRepository.getCurrentUser();
