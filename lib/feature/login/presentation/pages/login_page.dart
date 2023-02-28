@@ -8,7 +8,11 @@ import '/feature/login/presentation/widgets/login_widget.dart';
 import '/util/colors.dart';
 
 class LoginPage extends StatefulWidget {
-  static const String route = "login_page";
+  //static const String route = "login_page";
+
+  static Route<void> route() {
+    return MaterialPageRoute<void>(builder: (_) => const LoginPage());
+  }
 
   const LoginPage({Key? key}) : super(key: key);
 

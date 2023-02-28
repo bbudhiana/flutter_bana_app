@@ -8,4 +8,5 @@ abstract class AuthRepository {
   Stream<AuthenticationStatus> get status;
   Future<Either<Failure, User>> logIn(String name, String password);
   void logOut();
+  void dispose();
 }

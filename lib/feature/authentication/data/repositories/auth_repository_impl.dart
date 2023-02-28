@@ -67,5 +67,6 @@ class AuthRepositoryImpl implements AuthRepository {
     return _controller.add(AuthenticationStatus.unauthenticated);
   }
 
+  @override
   void dispose() => _controller.close();
 }
