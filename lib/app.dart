@@ -7,8 +7,10 @@ import '/feature/weather/presentation/pages/weather_page.dart';
 import 'config/app_theme.dart';
 import 'di/injection.dart' as di;
 import 'config/routes.dart' as router;
+import 'feature/authentication/domain/repositories/auth_repository.dart';
 import 'feature/login/presentation/bloc/login/login_bloc.dart';
 import '/feature/balance/presentation/pages/balance_page.dart';
+import 'feature/user/domain/repositories/user_repository.dart';
 import 'size_config.dart';
 
 class App extends StatefulWidget {
@@ -19,6 +21,23 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
+  //dibuat late karena isinya baru diinisiasi kemudian di initState
+  late final AuthRepository _authenticationRepository;
+  late final UserRepository _userRepository;
+
+  @override
+  void initState() {
+    super.initState();
+    _authenticationRepository = AuthRepository();
+    _userRepository = UserRepository();
+  }
+
+  @override
+  void dispose() {
+    _authenticationRepository.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
