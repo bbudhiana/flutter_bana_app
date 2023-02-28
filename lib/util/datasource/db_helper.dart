@@ -31,14 +31,22 @@ class DbHelper {
   Future<Database> openDB() async {
     final dbPath = await sqlite.getDatabasesPath();
     return sqlite.openDatabase(path.join(dbPath, 'test.db'),
-        onCreate: (db, version) {
-      tables.forEach((table) async {
+        //onCreate: (db, version) {
+        /* tables.forEach((table) async {
         await db.execute(table).then((value) {
           print("berhasil ");
         }).catchError((err) {
           print("errornya ${err.toString()}");
         });
-      });
+      }); */
+        onCreate: (db, version) async {
+      for (var table in tables) {
+        await db.execute(table).then((value) {
+          print("berhasil ");
+        }).catchError((err) {
+          print("errornya ${err.toString()}");
+        });
+      }
       //initial data
       insert(UserQuery.tableName,
           {"name": "alice", "password": "alice123", "amount": 1000});

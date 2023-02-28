@@ -42,7 +42,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   ); */
   di.init();
-  runApp(const MyApp());
+  runApp(const App());
 
   // Remove splash screen when bootstrap is complete
   FlutterNativeSplash.remove();

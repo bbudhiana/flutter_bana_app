@@ -1,4 +1,5 @@
 import 'package:flutter_bana_app/feature/authentication/domain/repositories/auth_repository.dart';
+import 'package:flutter_bana_app/feature/authentication/presentation/bloc/authentication_bloc.dart';
 
 import '../feature/authentication/data/datasources/auth_remote_data_source.dart';
 import '../feature/authentication/data/repositories/auth_repository_impl.dart';
@@ -8,6 +9,9 @@ import '../feature/login/data/repositories/login_repository_impl.dart';
 import '../feature/login/domain/repositories/login_repository.dart';
 import '../feature/login/domain/usecases/get_authentication.dart';
 import '../feature/login/presentation/bloc/login/login_bloc.dart';
+import '../feature/user/data/datasources/user_remote_data_source.dart';
+import '../feature/user/data/repositories/user_repository_impl.dart';
+import '../feature/user/domain/repositories/user_repository.dart';
 import '../feature/weather/data/datasources/remote_data_source.dart';
 import '../feature/weather/data/repositories/weather_repository_impl.dart';
 import '../feature/weather/domain/repositories/weather_repository.dart';
@@ -25,6 +29,8 @@ void init() async {
   // bloc
   locator.registerFactory<WeatherBloc>(() => WeatherBloc(locator()));
   locator.registerFactory(() => LoginBloc(locator()));
+  locator.registerFactory(() => AuthenticationBloc(
+      authenticationRepository: locator(), userRepository: locator()));
 
   locator.registerLazySingleton(() => GetCurrentWeather(locator()));
   locator.registerLazySingleton(() => GetAuthentication(locator()));
@@ -58,11 +64,19 @@ void init() async {
   );
 
   locator.registerLazySingleton<AuthRepository>(
-    () => AuthRepositoryImpl(remoteDataSource: locator()),
+    () => AuthRepositoryImpl(authRemoteDataSource: locator()),
   );
 
   locator.registerLazySingleton<AuthRemoteDataSource>(
     () => AuthRemoteDataSourceImpl(),
+  );
+
+  locator.registerLazySingleton<UserRepository>(
+    () => UserRepositoryImpl(userRemoteDataSource: locator()),
+  );
+
+  locator.registerLazySingleton<UserRemoteDataSource>(
+    () => UserRemoteDataSourceImpl(),
   );
 
   locator.registerLazySingleton(() => http.Client());

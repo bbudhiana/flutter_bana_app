@@ -3,17 +3,15 @@ import 'dart:convert';
 import '../../../../util/datasource/db_helper.dart';
 import '/util/exception.dart';
 import '../models/user_model.dart';
-import 'package:http/http.dart' as http;
 
-abstract class RemoteDataSource {
+abstract class UserRemoteDataSource {
   Future<UserModel> getUserByNameAndPassword(String name, String password);
   Future<UserModel> getCurrentUser();
 }
 
-class RemoteDataSourceImpl implements RemoteDataSource {
-  final http.Client client;
+class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   DbHelper helper = DbHelper();
-  RemoteDataSourceImpl({required this.client});
+  UserRemoteDataSourceImpl();
 
   @override
   Future<UserModel> getUserByNameAndPassword(
