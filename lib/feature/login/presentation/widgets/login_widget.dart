@@ -34,7 +34,7 @@ class LoginWidget extends StatelessWidget {
                 ),
               );
             if (state.loginSuccess == true) {
-              Navigator.pushReplacementNamed(context, HomeMain.route);
+              Navigator.pushReplacementNamed(context, HomeMain.route());
             }
           }
         },
