@@ -1,12 +1,12 @@
-import '../../../home/presentasion/pages/home_main.dart';
-import '/config/hexcolor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+
 import '/feature/login/presentation/bloc/login/login_bloc.dart';
 import '/feature/login/presentation/models/models.dart';
 import '/util/colors.dart';
 import '/util/images.dart';
+import '../../../home/presentasion/pages/home_main.dart';
 
 class LoginWidget extends StatelessWidget {
   const LoginWidget({Key? key}) : super(key: key);
@@ -21,7 +21,7 @@ class LoginWidget extends StatelessWidget {
               ..showSnackBar(
                 SnackBar(
                   content: Text(state.responseMessage),
-                  backgroundColor: Color.fromARGB(255, 211, 45, 23),
+                  backgroundColor: const Color.fromARGB(255, 211, 45, 23),
                 ),
               );
           } else if (state.status.isSubmissionSuccess) {
@@ -34,7 +34,7 @@ class LoginWidget extends StatelessWidget {
                 ),
               );
             if (state.loginSuccess == true) {
-              Navigator.pushReplacementNamed(context, HomeMain.route());
+              Navigator.pushReplacementNamed(context, HomeMain.route);
             }
           }
         },

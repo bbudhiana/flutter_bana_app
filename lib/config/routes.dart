@@ -9,7 +9,7 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
     case WeatherPage.route:
       return MaterialPageRoute(builder: (context) => const WeatherPage());
     case HomeMain.route:
-      return MaterialPageRoute(builder: (context) => const HomeMain());
+      return MaterialPageRoute<void>(builder: (_) => const HomeMain());
   }
   return null;
 }

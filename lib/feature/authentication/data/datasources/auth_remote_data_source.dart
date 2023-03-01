@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../../../util/datasource/db_helper.dart';
 import '../../../../util/datasource/db_shared_preferences.dart';
 import '../../../../util/exception.dart';
@@ -23,8 +25,15 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
     //String name = "alice";
     //String password = "alice123";
-    String name = helperSharePreferences.getDataString('name') ?? "";
-    String password = helperSharePreferences.getDataString('password') ?? "";
+
+    // Obtain shared preferences.
+    final prefs = await SharedPreferences.getInstance();
+    final String name = prefs.getString('name') ?? "";
+    final String password = prefs.getString('password') ?? "";
+
+    /* var name = helperSharePreferences.getDataString('name') ?? "uhuy";
+    var password = helperSharePreferences.getDataString('password') ?? 'uhuy'; */
+
     final responsedata = await helper.getAuthStatus(name, password);
 
     if (responsedata.isNotEmpty) {

@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bana_app/feature/authentication/domain/usecase/get_auth_repository.dart';
-import 'package:flutter_bana_app/feature/home/presentasion/pages/home_main.dart';
-import 'package:flutter_bana_app/feature/login/presentation/pages/login_page.dart';
+import 'package:flutter_bana_app/feature/authentication/data/repositories/auth_repository_impl.dart';
+import 'package:flutter_bana_app/feature/user/data/datasources/user_remote_data_source.dart';
+import 'package:flutter_bana_app/feature/user/data/repositories/user_repository_impl.dart';
+import 'package:flutter_bana_app/feature/user/domain/usecases/get_user_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '/feature/weather/presentation/bloc/weather_bloc.dart';
-import '/feature/weather/presentation/pages/weather_page.dart';
+
 import 'config/app_theme.dart';
-import 'di/injection.dart' as di;
-import 'config/routes.dart' as router;
+import 'feature/authentication/data/datasources/auth_remote_data_source.dart';
 import 'feature/authentication/domain/entities/auth.dart';
 import 'feature/authentication/domain/repositories/auth_repository.dart';
+import 'feature/authentication/domain/usecase/get_auth_repository.dart';
 import 'feature/authentication/presentation/bloc/authentication_bloc.dart';
-import 'feature/login/presentation/bloc/login/login_bloc.dart';
-import '/feature/balance/presentation/pages/balance_page.dart';
+import 'feature/home/presentasion/pages/home_main.dart';
+import 'feature/login/presentation/pages/login_page.dart';
 import 'feature/splash/view/splash_page.dart';
 import 'feature/user/domain/repositories/user_repository.dart';
-import 'size_config.dart';
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
@@ -26,16 +25,20 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   //dibuat late karena isinya baru diinisiasi kemudian di initState
-  late final AuthRepository _authRepository;
-  late final UserRepository _userRepository;
-
-  late final GetAuthRepository _getAuthRepository;
+  late final AuthRepositoryImpl _authRepository;
+  late final UserRepositoryImpl _userRepository;
+  late final AuthRemoteDataSource _authRemoteDataSource;
+  late final UserRemoteDataSource _userRemoteDataSource;
 
   @override
   void initState() {
     super.initState();
-    _authRepository = _getAuthRepository.executeAuthRepo();
-    _userRepository = _getAuthRepository.executeUserRepo();
+    _authRemoteDataSource = AuthRemoteDataSourceImpl();
+    _userRemoteDataSource = UserRemoteDataSourceImpl();
+    _authRepository =
+        AuthRepositoryImpl(authRemoteDataSource: _authRemoteDataSource);
+    _userRepository =
+        UserRepositoryImpl(userRemoteDataSource: _userRemoteDataSource);
   }
 
   @override
@@ -83,8 +86,8 @@ class _AppViewState extends State<AppView> {
           listener: (context, state) {
             switch (state.status) {
               case AuthenticationStatus.authenticated:
-                _navigator.pushAndRemoveUntil<void>(
-                  HomeMain.route(),
+                _navigator.pushAndRemoveUntil(
+                  HomeMain.routes(),
                   (route) => false,
                 );
                 break;

@@ -10,22 +10,34 @@ class DbSharedPreferences {
 
   DbSharedPreferences._singleton();
 
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  final _prefs = SharedPreferences.getInstance();
 
-  Future<bool> inputDataString(String data, String value) async {
+  inputDataString(String data, String value) async {
     final SharedPreferences prefs = await _prefs;
     var result = prefs.setString(data, value);
     return result;
   }
 
-  String? getDataString(String data) {
-    final SharedPreferences prefs = _prefs as SharedPreferences;
+  getDataString(String data) async {
+    final SharedPreferences prefs = await _prefs;
     final String? output = prefs.getString(data);
-    return output;
+    return output ?? "";
   }
 
   void deleteDataString(String data) {
     final SharedPreferences prefs = _prefs as SharedPreferences;
     prefs.remove(data);
+  }
+
+  saveValue() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('key', "value");
+  }
+
+  getValue() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    //Return String
+    String? stringValue = prefs.getString('key');
+    return stringValue;
   }
 }

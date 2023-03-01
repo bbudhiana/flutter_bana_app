@@ -7,8 +7,8 @@ import '/util/colors.dart';
 import '/util/images.dart';
 
 class HomeMain extends StatefulWidget {
-  //static const String route = "home_main";
-  static Route<void> route() {
+  static const String route = "home_main";
+  static Route<void> routes() {
     return MaterialPageRoute<void>(builder: (_) => const HomeMain());
   }
 
