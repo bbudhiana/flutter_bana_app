@@ -1,3 +1,5 @@
+import 'package:flutter_bana_app/feature/authentication/domain/usecase/log_in.dart';
+
 import '../../../authentication/domain/repositories/auth_repository.dart';
 
 import '/feature/login/presentation/bloc/login/login_bloc.dart';
@@ -50,6 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                         authRepository:
                             RepositoryProvider.of<AuthRepository>(context),
                       );
+                      //return LoginBloc(RepositoryProvider.of<LogIn>(context));
                     },
                     child: const LoginWidget(),
                     //child: const Text('test'),

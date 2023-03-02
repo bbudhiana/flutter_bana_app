@@ -15,6 +15,8 @@ part 'login_state.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc({required AuthRepository authRepository})
       : _authRepository = authRepository,
+        /* LoginBloc(LogIn logIn)
+      : _logIn = logIn, */
         super(const LoginState(visibility: false)) {
     on<LoginNameChanged>(_onNameChanged);
     on<LoginPasswordChanged>(_onPasswordChanged);
@@ -23,6 +25,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   final AuthRepository _authRepository;
+  //final LogIn _logIn;
 
   void _onVisibility(
       VisibilityPasswordChanged event, Emitter<LoginState> emit) {
@@ -63,6 +66,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       */
       final res =
           await _authRepository.logIn(state.name.value, state.password.value);
+      //final res = await _logIn.execute(state.name.value, state.password.value);
 
       res.fold(
         (failure) {

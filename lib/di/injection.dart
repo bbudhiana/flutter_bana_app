@@ -4,6 +4,7 @@ import 'package:flutter_bana_app/feature/authentication/presentation/bloc/authen
 import '../feature/authentication/data/datasources/auth_remote_data_source.dart';
 import '../feature/authentication/data/repositories/auth_repository_impl.dart';
 import '../feature/authentication/domain/usecase/get_status.dart';
+import '../feature/authentication/domain/usecase/log_in.dart';
 import '../feature/login/data/datasources/login_remote_data_source sqlite.dart';
 import '../feature/login/data/datasources/login_remote_data_source.dart';
 import '../feature/login/data/repositories/login_repository_impl.dart';
@@ -31,12 +32,14 @@ void init() async {
   locator.registerFactory<WeatherBloc>(() => WeatherBloc(locator()));
   locator
       .registerFactory<LoginBloc>(() => LoginBloc(authRepository: locator()));
+  //locator.registerFactory<LoginBloc>(() => LoginBloc(locator()));
   locator.registerFactory(() => AuthenticationBloc(
       authenticationRepository: locator(), userRepository: locator()));
 
   locator.registerLazySingleton(() => GetCurrentWeather(locator()));
   locator.registerLazySingleton(() => GetAuthentication(locator()));
   locator.registerLazySingleton(() => GetStatus(locator()));
+  locator.registerLazySingleton(() => LogIn(locator()));
 
   locator.registerLazySingleton<WeatherRepository>(
     () => WeatherRepositoryImpl(

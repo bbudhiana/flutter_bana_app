@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bana_app/feature/user/domain/usecases/get_current_user.dart';
 
 import '../../../user/domain/entities/user.dart';
 import '../../../user/domain/repositories/user_repository.dart';
@@ -51,6 +53,7 @@ class AuthenticationBloc
       case AuthenticationStatus.unauthenticated:
         return emit(const AuthenticationState.unauthenticated());
       case AuthenticationStatus.authenticated:
+        print('ini ke triger bukan di awal, tapi by event misal  login');
         //cari dulu usernya, misal bisa diganti getUserByNameAndPassword
         final user = await _tryGetUser();
         return emit(user != null
@@ -77,7 +80,6 @@ class AuthenticationBloc
     } catch (_) {
       return null;
     }
-    return null;
 
     /*  try {
       final user = await _userRepository.getCurrentUser();

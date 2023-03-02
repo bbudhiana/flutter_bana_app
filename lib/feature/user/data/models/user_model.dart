@@ -25,12 +25,14 @@ class UserModel extends Equatable {
   Map<String, dynamic> toJson() =>
       {'id': id, 'name': name, 'password': password, 'amount': amount};
 
-  User toEntity() => User(
-        id: id,
-        name: name,
-        password: password,
-        amount: amount,
-      );
+  User toEntity() {
+    return User(
+      id: id,
+      name: name,
+      password: password,
+      amount: amount,
+    );
+  }
 
   @override
   List<Object?> get props => [id, name, password, amount];

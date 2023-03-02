@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../../../util/datasource/db_helper.dart';
 import '/util/exception.dart';
 import '../models/user_model.dart';
@@ -27,11 +29,15 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
   @override
   Future<UserModel> getCurrentUser() async {
-    String name = "alice";
-    final response = await helper.getCurrentUser(name);
+    // Obtain shared preferences.
+    final prefs = await SharedPreferences.getInstance();
+    final String name = prefs.getString('name') ?? "";
+    final String password = prefs.getString('password') ?? "";
 
+    final response = await helper.getDataUserByNameAndPassword(name, password);
     if (response.isNotEmpty) {
-      return UserModel.fromJson(json.decode(response.toString()));
+      //return UserModel.fromJson(json.decode(response.toString()));
+      return UserModel.fromJson(response);
     } else {
       throw FetchDataException();
     }

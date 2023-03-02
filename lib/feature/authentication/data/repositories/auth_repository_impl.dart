@@ -19,6 +19,7 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Stream<AuthenticationStatus> get status async* {
     try {
+      print('Triger awal state auth, ketika pertama aplikasi jalan');
       await Future<void>.delayed(const Duration(seconds: 1));
       final result = await authRemoteDataSource.status;
 

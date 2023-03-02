@@ -21,7 +21,6 @@ class UserRepositoryImpl implements UserRepository {
   Future<Either<Failure, User>> getCurrentUser() async {
     try {
       final result = await userRemoteDataSource.getCurrentUser();
-
       //return berupa Weather Data Model maka harus konversi ke Weather Entity Model
       return Right(result.toEntity());
     } on FetchDataException {
