@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bana_app/feature/authentication/data/repositories/auth_repository_impl.dart';
-import 'package:flutter_bana_app/feature/user/data/datasources/user_remote_data_source.dart';
-import 'package:flutter_bana_app/feature/user/data/repositories/user_repository_impl.dart';
-import 'package:flutter_bana_app/feature/user/domain/usecases/get_user_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'config/app_theme.dart';
 import 'feature/authentication/data/datasources/auth_remote_data_source.dart';
+import 'feature/authentication/data/repositories/auth_repository_impl.dart';
 import 'feature/authentication/domain/entities/auth.dart';
 import 'feature/authentication/domain/repositories/auth_repository.dart';
-import 'feature/authentication/domain/usecase/get_auth_repository.dart';
 import 'feature/authentication/presentation/bloc/authentication_bloc.dart';
 import 'feature/home/presentasion/pages/home_main.dart';
 import 'feature/login/presentation/pages/login_page.dart';
 import 'feature/splash/view/splash_page.dart';
+import 'feature/user/data/datasources/user_remote_data_source.dart';
+import 'feature/user/data/repositories/user_repository_impl.dart';
 import 'feature/user/domain/repositories/user_repository.dart';
 
 class App extends StatefulWidget {
@@ -25,8 +23,9 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   //dibuat late karena isinya baru diinisiasi kemudian di initState
-  late final AuthRepositoryImpl _authRepository;
-  late final UserRepositoryImpl _userRepository;
+
+  late final AuthRepository _authRepository;
+  late final UserRepository _userRepository;
   late final AuthRemoteDataSource _authRemoteDataSource;
   late final UserRemoteDataSource _userRemoteDataSource;
 
@@ -84,10 +83,11 @@ class _AppViewState extends State<AppView> {
       builder: (context, child) {
         return BlocListener<AuthenticationBloc, AuthenticationState>(
           listener: (context, state) {
+            print(state.status);
             switch (state.status) {
               case AuthenticationStatus.authenticated:
-                _navigator.pushAndRemoveUntil(
-                  HomeMain.routes(),
+                _navigator.pushAndRemoveUntil<void>(
+                  HomeMain.route(),
                   (route) => false,
                 );
                 break;

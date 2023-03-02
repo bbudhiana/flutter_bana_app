@@ -35,11 +35,6 @@ class ResponseMessage extends LoginEvent {
   final String responseMessage;
 }
 
-class LoginSuccess extends LoginEvent {
-  const LoginSuccess(this.loginSuccess);
-  final bool loginSuccess;
-}
-
 class VisibilityPasswordChanged extends LoginEvent {
   const VisibilityPasswordChanged(this.visibility);
 

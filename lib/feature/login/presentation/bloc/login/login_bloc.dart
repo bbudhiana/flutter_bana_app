@@ -1,26 +1,28 @@
 import 'dart:core';
-import '../../models/name.dart';
-import '/di/injection.dart';
+
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bana_app/feature/authentication/domain/repositories/auth_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import '/feature/login/domain/usecases/get_authentication.dart';
+
+import '../../../../user/domain/entities/user.dart';
 import '/feature/login/presentation/models/models.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import '../../../../authentication/domain/usecase/log_in.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final GetAuthentication _getAuthentication;
-
-  LoginBloc(this._getAuthentication)
-      : super(const LoginState(visibility: false)) {
+  LoginBloc({required AuthRepository authRepository})
+      : _authRepository = authRepository,
+        super(const LoginState(visibility: false)) {
     on<LoginNameChanged>(_onNameChanged);
     on<LoginPasswordChanged>(_onPasswordChanged);
     on<LoginSubmitted>(_onSubmitted);
     on<VisibilityPasswordChanged>(_onVisibility);
   }
+
+  final AuthRepository _authRepository;
 
   void _onVisibility(
       VisibilityPasswordChanged event, Emitter<LoginState> emit) {
@@ -53,28 +55,27 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     LoginSubmitted event,
     Emitter<LoginState> emit,
   ) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     if (state.status.isValidated) {
       emit(state.copyWith(status: FormzStatus.submissionInProgress));
 
-      final res = await _getAuthentication.execute(
+      /* final res = await _getAuthentication.execute(
           state.name.value, state.password.value);
+      */
+      final res =
+          await _authRepository.logIn(state.name.value, state.password.value);
 
       res.fold(
         (failure) {
           emit(state.copyWith(
-              status: FormzStatus.submissionFailure,
-              responseMessage: failure.message,
-              loginSuccess: false));
+            status: FormzStatus.submissionFailure,
+            responseMessage: failure.message,
+          ));
         },
         (data) {
-          sharedPreferences.setString("name", state.name.value);
-          sharedPreferences.setBool("islogin", data.code != 200 ? false : true);
           emit(state.copyWith(
               status: FormzStatus.submissionSuccess,
-              //responseMessage: data.message,
-              responseMessage: 'Login Success',
-              loginSuccess: data.code != 200 ? false : true));
+              user: data,
+              responseMessage: "success login"));
         },
       );
     }

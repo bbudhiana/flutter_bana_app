@@ -77,8 +77,11 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
     if (responsedata.isNotEmpty) {
       //input data user di sharedpreferences
-      helperSharePreferences.inputDataString('name', name);
-      helperSharePreferences.inputDataString('password', password);
+      /* helperSharePreferences.inputDataString('name', name);
+      helperSharePreferences.inputDataString('password', password); */
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setString('name', name);
+      prefs.setString('password', password);
       return UserModel.fromJson(responsedata);
     } else {
       throw FetchDataException();
@@ -86,9 +89,12 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  void getLogout() {
+  Future<void> getLogout() async {
     //hapus data di sharedpreferences
-    helperSharePreferences.deleteDataString('name');
-    helperSharePreferences.deleteDataString('password');
+    /* helperSharePreferences.deleteDataString('name');
+    helperSharePreferences.deleteDataString('password'); */
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('name');
+    await prefs.remove('password');
   }
 }

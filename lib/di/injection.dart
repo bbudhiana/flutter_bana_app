@@ -29,7 +29,8 @@ final locator = GetIt.instance;
 void init() async {
   // bloc
   locator.registerFactory<WeatherBloc>(() => WeatherBloc(locator()));
-  locator.registerFactory(() => LoginBloc(locator()));
+  locator
+      .registerFactory<LoginBloc>(() => LoginBloc(authRepository: locator()));
   locator.registerFactory(() => AuthenticationBloc(
       authenticationRepository: locator(), userRepository: locator()));
 

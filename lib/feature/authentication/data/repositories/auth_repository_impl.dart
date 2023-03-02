@@ -41,8 +41,7 @@ class AuthRepositoryImpl implements AuthRepository {
         const Duration(milliseconds: 300),
         () => _controller.add(AuthenticationStatus.authenticated),
       );
-
-      //return berupa Weather Data Model maka harus konversi ke Weather Entity Model
+      //return berupa User Data Model maka harus konversi ke User Entity Model
       return Right(result.toEntity());
     } on FetchDataException {
       await Future.delayed(

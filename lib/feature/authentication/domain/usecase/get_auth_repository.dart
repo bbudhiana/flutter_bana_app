@@ -1,11 +1,13 @@
 import '../repositories/auth_repository.dart';
 
 class GetAuthRepository {
-  final AuthRepository authRepository;
+  AuthRepository authRepository;
 
-  GetAuthRepository(this.authRepository);
+  GetAuthRepository(
+    this.authRepository,
+  );
 
-  AuthRepository execute() {
+  AuthRepository get authRepo {
     return authRepository;
   }
 }

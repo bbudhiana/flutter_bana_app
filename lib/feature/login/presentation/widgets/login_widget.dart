@@ -33,9 +33,7 @@ class LoginWidget extends StatelessWidget {
                   backgroundColor: Colors.green,
                 ),
               );
-            if (state.loginSuccess == true) {
-              Navigator.pushReplacementNamed(context, HomeMain.route);
-            }
+            Navigator.pushReplacementNamed(context, HomeMain.routeString);
           }
         },
         child: Column(
@@ -72,7 +70,7 @@ class _EmailInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(
-      buildWhen: (previous, current) => previous.email != current.email,
+      buildWhen: (previous, current) => previous.name != current.name,
       builder: (context, state) {
         return Column(
           children: [
@@ -82,7 +80,7 @@ class _EmailInput extends StatelessWidget {
                 "Username",
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
-                  color: state.email.invalid
+                  color: state.name.invalid
                       ? SharedColors.homerBankDangerColor
                       : Colors.black,
                 ),
@@ -94,9 +92,9 @@ class _EmailInput extends StatelessWidget {
               shadowColor: Colors.grey,
               borderRadius: BorderRadius.circular(8.0),
               child: TextField(
-                key: const Key('loginForm_EmailInput_textField'),
-                onChanged: (email) =>
-                    context.read<LoginBloc>().add(LoginEmailChanged(email)),
+                key: const Key('loginForm_NameInput_textField'),
+                onChanged: (name) =>
+                    context.read<LoginBloc>().add(LoginNameChanged(name)),
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: SharedColors.homerBankWhiteColor,
@@ -108,7 +106,7 @@ class _EmailInput extends StatelessWidget {
                   contentPadding: const EdgeInsets.symmetric(
                       vertical: 12.0, horizontal: 16.0),
                   border: OutlineInputBorder(
-                    borderSide: state.email.invalid
+                    borderSide: state.name.invalid
                         ? const BorderSide(
                             color: SharedColors.homerBankDangerColor,
                             width: 2.0)
@@ -116,7 +114,7 @@ class _EmailInput extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: state.email.invalid
+                    borderSide: state.name.invalid
                         ? const BorderSide(
                             color: SharedColors.homerBankDangerColor,
                             width: 2.0)
@@ -141,10 +139,10 @@ class _EmailInput extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                state.email.invalid ? _getErrorEmail(state.email.error) : '',
+                state.name.invalid ? _getErrorName(state.name.error) : '',
                 style: TextStyle(
                   fontSize: 10,
-                  color: state.email.invalid
+                  color: state.name.invalid
                       ? SharedColors.homerBankDangerColor
                       : Colors.green,
                 ),
@@ -156,12 +154,10 @@ class _EmailInput extends StatelessWidget {
     );
   }
 
-  String _getErrorEmail(EmailValidationError? err) {
+  String _getErrorName(NameValidationError? err) {
     switch (err) {
-      case EmailValidationError.empty:
+      case NameValidationError.empty:
         return "user can\'t be empty";
-      case EmailValidationError.invalid:
-        return "user invalid";
       default:
         return "";
     }
