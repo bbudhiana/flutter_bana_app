@@ -1,3 +1,5 @@
+import 'package:flutter_bana_app/feature/authentication/domain/repositories/auth_repository.dart';
+
 import '/util/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -27,26 +29,41 @@ class _PopupMenuWidgetState extends State<PopupMenuWidget> {
       ),
       itemBuilder: (_) => <PopupMenuEntry>[
         const PopupMenuItem(
+            value: 1,
             child: ListTile(
-          title: Text('Edit Profile'),
-        )),
+              title: Text('Edit Profile'),
+            )),
         const PopupMenuItem(
+            value: 2,
             child: ListTile(
-          title: Text('Settings'),
-        )),
+              title: Text('Settings'),
+            )),
         const PopupMenuItem(
+            value: 3,
             child: ListTile(
-          title: Text('About ID'),
-        )),
+              title: Text('Privacy Policy'),
+            )),
         const PopupMenuItem(
+            value: 4,
             child: ListTile(
-          title: Text('Privacy Policy'),
-        )),
+              title: Text('Term of use'),
+            )),
         const PopupMenuItem(
+            value: 5,
             child: ListTile(
-          title: Text('Term of use'),
-        )),
+              title: Text('Logout'),
+            )),
       ],
+      onSelected: (value) {
+        switch (value) {
+          case 1:
+          case 2:
+          case 3:
+          case 4:
+          case 5:
+          default:
+        }
+      },
     );
   }
 }

@@ -67,6 +67,7 @@ class AuthenticationBloc
   Future<User?> _tryGetUser() async {
     //misal ambil data dari sharedPreference yaitu name and password
     //kemudian ambil data dari user repository getUserByNameAndPassword
+    User? tampung;
     try {
       final result = await _userRepository.getCurrentUser();
       result.fold(
@@ -74,13 +75,14 @@ class AuthenticationBloc
           return null;
         },
         (data) {
+          tampung = data;
           return data;
         },
       );
     } catch (_) {
       return null;
     }
-
+    return tampung;
     /*  try {
       final user = await _userRepository.getCurrentUser();
       return Right(user);
