@@ -41,53 +41,45 @@ class _HomeMainState extends State<HomeMain>
         return Future<bool>.value(true);
       },
       child: SharedSafeAreaWidget(
-        child: BlocProvider(
-          create: (context) {
-            return HomeBloc(
-              authRepository: RepositoryProvider.of<AuthRepository>(context),
-            );
-            //return LoginBloc(RepositoryProvider.of<LogIn>(context));
-          },
-          child: Scaffold(
-            backgroundColor: SharedColors.homerBankWhiteColor,
-            appBar: _selectedIndex != 0
-                ? null
-                : AppBar(
-                    toolbarHeight: 59,
-                    backgroundColor: SharedColors.homerBankWhiteColor,
-                    leading: const Padding(
-                      padding: EdgeInsets.only(left: 10),
-                      child: SharedImagesHome.logoText,
-                    ),
-                    leadingWidth: 100,
-                    actions: const [PopupMenuWidget()],
+        child: Scaffold(
+          backgroundColor: SharedColors.homerBankWhiteColor,
+          appBar: _selectedIndex != 0
+              ? null
+              : AppBar(
+                  toolbarHeight: 59,
+                  backgroundColor: SharedColors.homerBankWhiteColor,
+                  leading: const Padding(
+                    padding: EdgeInsets.only(left: 10),
+                    child: SharedImagesHome.logoText,
                   ),
-            resizeToAvoidBottomInset: true,
-            body: mainPages.getpages.elementAt(_selectedIndex),
-            bottomNavigationBar: BottomNavigationBar(
-              showUnselectedLabels: true,
-              unselectedItemColor: Colors.grey,
-              items: const <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                    icon: SharedImagesBottomNavigation.homeOff,
-                    activeIcon: SharedImagesBottomNavigation.homeOn,
-                    label: 'Home',
-                    tooltip: ''),
-                BottomNavigationBarItem(
-                    icon: SharedImagesBottomNavigation.transactionOff,
-                    activeIcon: SharedImagesBottomNavigation.transactionOn,
-                    label: 'Transfer',
-                    tooltip: ''),
-                BottomNavigationBarItem(
-                    icon: SharedImagesBottomNavigation.historyOff,
-                    activeIcon: SharedImagesBottomNavigation.historyOn,
-                    label: 'History',
-                    tooltip: ''),
-              ],
-              currentIndex: _selectedIndex,
-              selectedItemColor: SharedColors.homerBankPrimaryColor,
-              onTap: _onItemTapped,
-            ),
+                  leadingWidth: 100,
+                  actions: const [PopupMenuWidget()],
+                ),
+          resizeToAvoidBottomInset: true,
+          body: mainPages.getpages.elementAt(_selectedIndex),
+          bottomNavigationBar: BottomNavigationBar(
+            showUnselectedLabels: true,
+            unselectedItemColor: Colors.grey,
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                  icon: SharedImagesBottomNavigation.homeOff,
+                  activeIcon: SharedImagesBottomNavigation.homeOn,
+                  label: 'Home',
+                  tooltip: ''),
+              BottomNavigationBarItem(
+                  icon: SharedImagesBottomNavigation.transactionOff,
+                  activeIcon: SharedImagesBottomNavigation.transactionOn,
+                  label: 'Transfer',
+                  tooltip: ''),
+              BottomNavigationBarItem(
+                  icon: SharedImagesBottomNavigation.historyOff,
+                  activeIcon: SharedImagesBottomNavigation.historyOn,
+                  label: 'History',
+                  tooltip: ''),
+            ],
+            currentIndex: _selectedIndex,
+            selectedItemColor: SharedColors.homerBankPrimaryColor,
+            onTap: _onItemTapped,
           ),
         ),
       ),

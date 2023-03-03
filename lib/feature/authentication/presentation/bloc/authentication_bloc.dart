@@ -97,4 +97,11 @@ class AuthenticationBloc
   ) {
     _authenticationRepository.logOut();
   }
+
+  //Observasi setiap perubahan state bisa pake sistem observer ini
+  @override
+  void onChange(Change<AuthenticationState> change) {
+    super.onChange(change);
+    print(change);
+  }
 }

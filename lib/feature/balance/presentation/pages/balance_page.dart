@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../size_config.dart';
+import '../../../authentication/presentation/bloc/authentication_bloc.dart';
 import '../../../home/presentasion/pages/components/home_header.dart';
 import '../../../home/presentasion/pages/components/info_balance.dart';
 
@@ -24,6 +26,30 @@ class _BalancePageState extends State<BalancePage> {
             SizedBox(height: getProportionateScreenWidth(30)),
             const InfoBalance(),
             SizedBox(height: getProportionateScreenWidth(30)),
+            Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Builder(
+                    builder: (context) {
+                      //context.select((AuthenticationBloc bloc) => bloc.state.user.id) will trigger updates if the user id changes
+                      final userId = context.select(
+                        (AuthenticationBloc bloc) => bloc.state.user.name,
+                      );
+                      return Text('UserID: $userId');
+                    },
+                  ),
+                  ElevatedButton(
+                    child: const Text('Logout'),
+                    onPressed: () {
+                      context
+                          .read<AuthenticationBloc>()
+                          .add(AuthenticationLogoutRequested());
+                    },
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

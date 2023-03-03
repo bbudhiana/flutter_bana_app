@@ -1,5 +1,7 @@
 import 'package:flutter_bana_app/feature/authentication/domain/repositories/auth_repository.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../authentication/presentation/bloc/authentication_bloc.dart';
 import '/util/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -61,11 +63,17 @@ class _PopupMenuWidgetState extends State<PopupMenuWidget> {
           case 3:
           case 4:
           case 5:
+            _logOut(context);
+            break;
           default:
         }
       },
     );
   }
+}
+
+void _logOut(BuildContext context) {
+  context.read<AuthenticationBloc>().add(AuthenticationLogoutRequested());
 }
 
 class TooltipShape extends ShapeBorder {
