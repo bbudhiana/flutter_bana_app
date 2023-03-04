@@ -22,7 +22,6 @@ class AuthRepositoryImpl implements AuthRepository {
       print('Triger awal state auth, ketika pertama aplikasi jalan');
       await Future<void>.delayed(const Duration(seconds: 1));
       final result = await authRemoteDataSource.status;
-
       //return berupa Auth Data Model maka harus konversi ke Auth Entity Model
       yield result.toEntity().status;
     } on FetchDataException {

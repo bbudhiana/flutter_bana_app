@@ -7,6 +7,7 @@ import 'feature/authentication/data/repositories/auth_repository_impl.dart';
 import 'feature/authentication/domain/entities/auth.dart';
 import 'feature/authentication/domain/repositories/auth_repository.dart';
 import 'feature/authentication/presentation/bloc/authentication_bloc.dart';
+import 'feature/authentication/presentation/cubit/auth_cubit.dart';
 import 'feature/home/presentasion/pages/home_main.dart';
 import 'feature/login/presentation/pages/login_page.dart';
 import 'feature/splash/view/splash_page.dart';
@@ -51,7 +52,8 @@ class _AppState extends State<App> {
     return RepositoryProvider.value(
       value: _authRepository,
       child: BlocProvider(
-        create: (_) => AuthenticationBloc(
+        //create: (_) => AuthenticationBloc(
+        create: (_) => AuthCubit(
           authenticationRepository: _authRepository,
           userRepository: _userRepository,
         ),
@@ -81,7 +83,8 @@ class _AppViewState extends State<AppView> {
       theme: AppTheme.light,
       navigatorKey: _navigatorKey,
       builder: (context, child) {
-        return BlocListener<AuthenticationBloc, AuthenticationState>(
+        //return BlocListener<AuthenticationBloc, AuthenticationState>(
+        return BlocListener<AuthCubit, AuthState>(
           listener: (context, state) {
             print(state.status);
             switch (state.status) {

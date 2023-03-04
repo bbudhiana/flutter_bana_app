@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_bana_app/feature/user/domain/usecases/get_current_user.dart';
+import '/feature/user/domain/usecases/get_current_user.dart';
 
 import '../../../user/domain/entities/user.dart';
 import '../../../user/domain/repositories/user_repository.dart';
@@ -27,12 +27,15 @@ class AuthenticationBloc
 
     //mendaftarkan event dari sebuah stream yang ada, kemudian 'dialirkan' ke state (AuthenticationStatusChanged)
     //default ketika pertama kali bloc digunakan, yaitu set stream status state
+    //AuthenticationStatusChanged hanya di trigger dari perubahan value _authenticationRepository.status
     _authenticationStatusSubscription = _authenticationRepository.status
         .listen((status) => add(_AuthenticationStatusChanged(status)));
   }
 
   final AuthRepository _authenticationRepository;
   final UserRepository _userRepository;
+
+  //dibuat late karena baru bisa diinisiasi setelah dapat status nya di _authenticationRepository.status
   late StreamSubscription<AuthenticationStatus>
       _authenticationStatusSubscription;
 

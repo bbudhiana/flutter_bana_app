@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '/feature/authentication/presentation/cubit/auth_cubit.dart';
 import '../../../../size_config.dart';
 import '../../../authentication/presentation/bloc/authentication_bloc.dart';
 import '../../../home/presentasion/pages/components/home_header.dart';
@@ -34,17 +35,22 @@ class _BalancePageState extends State<BalancePage> {
                     builder: (context) {
                       //context.select((AuthenticationBloc bloc) => bloc.state.user.id) will trigger updates if the user id changes
                       final userId = context.select(
-                        (AuthenticationBloc bloc) => bloc.state.user.name,
+                        //(AuthenticationBloc bloc) => bloc.state.user.name,
+                        (AuthCubit cubit) => cubit.state.user.name,
                       );
                       return Text('UserID: $userId');
                     },
                   ),
                   ElevatedButton(
-                    child: const Text('Logout'),
+                    /* child: const Text('Logout'),
                     onPressed: () {
                       context
                           .read<AuthenticationBloc>()
                           .add(AuthenticationLogoutRequested());
+                    }, */
+                    child: const Text('Logout'),
+                    onPressed: () {
+                      context.read<AuthCubit>().logOutRequest();
                     },
                   ),
                 ],

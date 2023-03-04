@@ -35,7 +35,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     var password = helperSharePreferences.getDataString('password') ?? 'uhuy'; */
 
     final responsedata = await helper.getAuthStatus(name, password);
-
     if (responsedata.isNotEmpty) {
       return AuthModel.fromJson(responsedata);
     } else {
