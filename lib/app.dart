@@ -50,6 +50,8 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return RepositoryProvider.value(
+      //menggunakan RepositoryProvider agar bisa mengambil repository dengan cara
+      //RepositoryProvider.of<AuthRepository>(context) di child bawahnya
       value: _authRepository,
       child: BlocProvider(
         //create: (_) => AuthenticationBloc(
