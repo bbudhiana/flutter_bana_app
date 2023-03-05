@@ -73,7 +73,8 @@ class _PopupMenuWidgetState extends State<PopupMenuWidget> {
 
 void _logOut(BuildContext context) {
   //context.read<AuthenticationBloc>().add(AuthenticationLogoutRequested());
-  context.read<AuthCubit>().logOutRequest();
+  context.read<AuthCubit>().logOutRequest(); //shortcut
+  //BlocProvider.of<AuthCubit>(context).logOutRequest(); //Official
 }
 
 class TooltipShape extends ShapeBorder {
