@@ -1,4 +1,4 @@
-import '/util/colors.dart';
+import '../../utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class SharedModalDialog {

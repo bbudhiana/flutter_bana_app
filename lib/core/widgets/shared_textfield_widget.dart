@@ -1,7 +1,7 @@
 import '/core/validation/firstname.dart';
 import '/core/validation/lastname.dart';
 import '/core/validation/username.dart';
-import '/util/colors.dart';
+import '../../utils/colors.dart';
 import 'package:flutter/material.dart';
 
 /* import '../../feature/login/presentation/models/models.dart';

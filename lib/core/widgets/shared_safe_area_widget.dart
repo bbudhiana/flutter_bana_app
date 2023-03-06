@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/util/colors.dart';
+import '../../utils/colors.dart';
 
 class SharedSafeAreaWidget extends StatelessWidget {
   final Color color;
