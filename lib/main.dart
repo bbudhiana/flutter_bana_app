@@ -4,6 +4,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'app.dart';
 import 'config/app_config.dart';
 import 'di/injection.dart' as di;
+import 'utils/datasource/prefs.dart';
 
 void main() async {
   ConfigEnvironment.setEnvironment(Environment.trial);
@@ -42,6 +43,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   ); */
   di.init();
+  await Prefs().initialize();
   runApp(const App());
 
   // Remove splash screen when bootstrap is complete

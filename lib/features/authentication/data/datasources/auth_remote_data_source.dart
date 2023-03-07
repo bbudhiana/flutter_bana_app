@@ -1,9 +1,7 @@
 import 'dart:async';
 
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../../utils/datasource/db_helper.dart';
-import '../../../../utils/datasource/db_shared_preferences.dart';
+import '../../../../utils/datasource/prefs.dart';
 import '../../../../utils/exception.dart';
 import '../../../user/data/models/user_model.dart';
 import '../models/auth_model.dart';
@@ -17,7 +15,6 @@ abstract class AuthRemoteDataSource {
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   AuthRemoteDataSourceImpl();
   DbHelper helper = DbHelper();
-  DbSharedPreferences helperSharePreferences = DbSharedPreferences();
 
   @override
   Future<AuthModel> get status async {
@@ -27,9 +24,12 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     //String password = "alice123";
 
     // Obtain shared preferences.
-    final prefs = await SharedPreferences.getInstance();
+    /* final prefs = await SharedPreferences.getInstance();
     final String name = prefs.getString('name') ?? "";
-    final String password = prefs.getString('password') ?? "";
+    final String password = prefs.getString('password') ?? ""; */
+
+    final String name = Prefs().getString('name') ?? "";
+    final String password = Prefs().getString('password') ?? "";
 
     /* var name = helperSharePreferences.getDataString('name') ?? "uhuy";
     var password = helperSharePreferences.getDataString('password') ?? 'uhuy'; */
@@ -78,9 +78,13 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       //input data user di sharedpreferences
       /* helperSharePreferences.inputDataString('name', name);
       helperSharePreferences.inputDataString('password', password); */
-      final prefs = await SharedPreferences.getInstance();
+      /* final prefs = await SharedPreferences.getInstance();
       prefs.setString('name', name);
-      prefs.setString('password', password);
+      prefs.setString('password', password); */
+
+      Prefs().setString('name', name);
+      Prefs().setString('password', password);
+
       return UserModel.fromJson(responsedata);
     } else {
       throw FetchDataException();
@@ -92,8 +96,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     //hapus data di sharedpreferences
     /* helperSharePreferences.deleteDataString('name');
     helperSharePreferences.deleteDataString('password'); */
-    final prefs = await SharedPreferences.getInstance();
+    /* final prefs = await SharedPreferences.getInstance();
     await prefs.remove('name');
-    await prefs.remove('password');
+    await prefs.remove('password'); */
+    await Prefs().remove('name');
+    await Prefs().remove('password');
   }
 }

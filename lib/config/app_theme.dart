@@ -6,6 +6,7 @@ import '../utils/fonts.dart';
 class AppTheme {
   static ThemeData get light {
     return ThemeData(
+        useMaterial3: true,
         appBarTheme: const AppBarTheme(
             centerTitle: true,
             titleTextStyle: TextStyle(
