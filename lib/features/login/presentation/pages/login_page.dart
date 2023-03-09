@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
+import '../../../authentication/domain/usecase/log_in.dart';
 import '/config/app_theme.dart';
 import '/core/responsive.dart';
 import '/core/widgets/shared_safe_area_widget.dart';
@@ -45,11 +47,12 @@ class _LoginPageState extends State<LoginPage> {
                 child: SingleChildScrollView(
                   child: BlocProvider(
                     create: (context) {
-                      return LoginBloc(
+                      /* return LoginBloc(
                         authRepository:
                             RepositoryProvider.of<AuthRepository>(context),
-                      );
+                      ); */
                       //return LoginBloc(RepositoryProvider.of<LogIn>(context));
+                      return GetIt.I<LoginBloc>();
                     },
                     child: const LoginWidget(),
                     //child: const Text('test'),

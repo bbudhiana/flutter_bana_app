@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 
+import '../../../../authentication/domain/usecase/log_in.dart';
 import '/features/authentication/domain/repositories/auth_repository.dart';
 import '/features/login/presentation/models/models.dart';
 import '../../../../user/domain/entities/user.dart';
@@ -12,10 +13,10 @@ part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  LoginBloc({required AuthRepository authRepository})
-      : _authRepository = authRepository,
-        /* LoginBloc(LogIn logIn)
-      : _logIn = logIn, */
+  /* LoginBloc({required AuthRepository authRepository})
+      : _authRepository = authRepository, */
+  LoginBloc(LogIn logIn)
+      : _logIn = logIn,
         super(const LoginState(visibility: false)) {
     on<LoginNameChanged>(_onNameChanged);
     on<LoginPasswordChanged>(_onPasswordChanged);
@@ -23,8 +24,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<VisibilityPasswordChanged>(_onVisibility);
   }
 
-  final AuthRepository _authRepository;
-  //final LogIn _logIn;
+  //final AuthRepository _authRepository;
+  final LogIn _logIn;
 
   void _onVisibility(
       VisibilityPasswordChanged event, Emitter<LoginState> emit) {
@@ -63,9 +64,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       /* final res = await _getAuthentication.execute(
           state.name.value, state.password.value);
       */
-      final res =
-          await _authRepository.logIn(state.name.value, state.password.value);
-      //final res = await _logIn.execute(state.name.value, state.password.value);
+      //final res = await _authRepository.logIn(state.name.value, state.password.value);
+      final res = await _logIn.execute(state.name.value, state.password.value);
 
       res.fold(
         (failure) {

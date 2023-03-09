@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bana_app/utils/colors.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../size_config.dart';
+import '../../../../authentication/presentation/cubit/auth_cubit.dart';
 
 class InfoBalance extends StatelessWidget {
   const InfoBalance({
@@ -24,44 +26,52 @@ class InfoBalance extends StatelessWidget {
         color: SharedColors.homerBankPrimaryColor,
         borderRadius: BorderRadius.circular(20),
       ),
-      child: Column(
-        //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const Text.rich(
-            TextSpan(
-              text: "Welcome home\n",
-              style: TextStyle(color: Colors.white),
-              children: [
-                TextSpan(
-                  text: "Your Deposite Today:",
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: getProportionateScreenWidth(30)),
-          const Center(
-            child: Text.rich(
+      child: Builder(builder: (context) {
+        final userName = context.select(
+          (AuthCubit cubit) => cubit.state.user.name,
+        );
+        final userAmount = context.select(
+          (AuthCubit cubit) => cubit.state.user.amount,
+        );
+        return Column(
+          //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text.rich(
               TextSpan(
-                style: TextStyle(color: Colors.white),
-                children: [
+                text: "Welcome home $userName\n",
+                style: const TextStyle(color: Colors.white),
+                children: const [
                   TextSpan(
-                    text: "1000",
+                    text: "Your Deposite Today:",
                     style: TextStyle(
-                      fontSize: 40,
+                      fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
               ),
             ),
-          ),
-        ],
-      ),
+            SizedBox(height: getProportionateScreenWidth(30)),
+            Center(
+              child: Text.rich(
+                TextSpan(
+                  style: const TextStyle(color: Colors.white),
+                  children: [
+                    TextSpan(
+                      text: "$userAmount",
+                      style: const TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        );
+      }),
     );
   }
 }

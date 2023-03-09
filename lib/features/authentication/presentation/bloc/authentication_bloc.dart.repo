@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_bana_app/features/authentication/domain/usecase/get_status.dart';
-import 'package:flutter_bana_app/features/authentication/domain/usecase/log_out.dart';
 import '/features/user/domain/usecases/get_current_user.dart';
 
 import '../../../user/domain/entities/user.dart';
@@ -18,13 +16,11 @@ part 'authentication_state.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
-  AuthenticationBloc(
-    GetStatus getStatus,
-    GetCurrentUser getCurrentUser,
-    LogOut logOut,
-  )   : _getStatus = getStatus,
-        _getCurrentUser = getCurrentUser,
-        _logOut = logOut,
+  AuthenticationBloc({
+    required AuthRepository authenticationRepository,
+    required UserRepository userRepository,
+  })  : _authenticationRepository = authenticationRepository,
+        _userRepository = userRepository,
         super(const AuthenticationState.unknown()) {
     on<_AuthenticationStatusChanged>(_onAuthenticationStatusChanged);
     on<AuthenticationLogoutRequested>(_onAuthenticationLogoutRequested);
@@ -32,16 +28,12 @@ class AuthenticationBloc
     //mendaftarkan event dari sebuah stream yang ada, kemudian 'dialirkan' ke state (AuthenticationStatusChanged)
     //default ketika pertama kali bloc digunakan, yaitu set stream status state
     //AuthenticationStatusChanged hanya di trigger dari perubahan value _authenticationRepository.status
-    //_authenticationStatusSubscription = _authenticationRepository.status.listen((status) => add(_AuthenticationStatusChanged(status)));
-    _authenticationStatusSubscription = _getStatus
-        .execute()
+    _authenticationStatusSubscription = _authenticationRepository.status
         .listen((status) => add(_AuthenticationStatusChanged(status)));
   }
-  final GetStatus _getStatus;
-  final GetCurrentUser _getCurrentUser;
-  final LogOut _logOut;
-  /* final AuthRepository _authenticationRepository;
-  final UserRepository _userRepository; */
+
+  final AuthRepository _authenticationRepository;
+  final UserRepository _userRepository;
 
   //dibuat late karena baru bisa diinisiasi setelah dapat status nya di _authenticationRepository.status
   late StreamSubscription<AuthenticationStatus>
@@ -66,23 +58,16 @@ class AuthenticationBloc
       case AuthenticationStatus.authenticated:
         print('ini ke triger bukan di awal, tapi by event misal  login');
         //cari dulu usernya, misal bisa diganti getUserByNameAndPassword
-        //final user = await _tryGetUser();
-        final user = await _getCurrentUser.execute();
-        /* return emit(user != null
+        final user = await _tryGetUser();
+        return emit(user != null
             ? AuthenticationState.authenticated(user)
-            : const AuthenticationState.unauthenticated()); */
-        user.fold((failure) {
-          emit(const AuthenticationState.unauthenticated());
-        }, (data) {
-          emit(AuthenticationState.authenticated(data));
-        });
-        break;
+            : const AuthenticationState.unauthenticated());
       case AuthenticationStatus.unknown:
         return emit(const AuthenticationState.unknown());
     }
   }
 
-  /* Future<User?> _tryGetUser() async {
+  Future<User?> _tryGetUser() async {
     //misal ambil data dari sharedPreference yaitu name and password
     //kemudian ambil data dari user repository getUserByNameAndPassword
     User? tampung;
@@ -107,14 +92,13 @@ class AuthenticationBloc
     } catch (_) {
       return null;
     } */
-  } */
+  }
 
   void _onAuthenticationLogoutRequested(
     AuthenticationLogoutRequested event,
     Emitter<AuthenticationState> emit,
   ) {
-    //_authenticationRepository.logOut();
-    _logOut.execute();
+    _authenticationRepository.logOut();
   }
 
   //Observasi setiap perubahan state bisa pake sistem observer ini

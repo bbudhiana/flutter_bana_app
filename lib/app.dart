@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 import 'config/app_theme.dart';
 import 'features/authentication/data/datasources/auth_remote_data_source.dart';
@@ -26,19 +27,21 @@ class _AppState extends State<App> {
   //dibuat late karena isinya baru diinisiasi kemudian di initState
 
   late final AuthRepository _authRepository;
-  late final UserRepository _userRepository;
-  late final AuthRemoteDataSource _authRemoteDataSource;
-  late final UserRemoteDataSource _userRemoteDataSource;
+  //late final UserRepository _userRepository;
+  /* late final AuthRemoteDataSource _authRemoteDataSource;
+  late final UserRemoteDataSource _userRemoteDataSource; */
 
   @override
   void initState() {
     super.initState();
-    _authRemoteDataSource = AuthRemoteDataSourceImpl();
+    /*  _authRemoteDataSource = AuthRemoteDataSourceImpl();
     _userRemoteDataSource = UserRemoteDataSourceImpl();
     _authRepository =
         AuthRepositoryImpl(authRemoteDataSource: _authRemoteDataSource);
     _userRepository =
-        UserRepositoryImpl(userRemoteDataSource: _userRemoteDataSource);
+        UserRepositoryImpl(userRemoteDataSource: _userRemoteDataSource); */
+    _authRepository = GetIt.I<AuthRepository>();
+    //_userRepository = GetIt.I<UserRepository>();
   }
 
   @override
@@ -49,20 +52,27 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => GetIt.I<AuthCubit>(),
+      child: const AppView(),
+    );
+  }
+  /* Widget build(BuildContext context) {
     return RepositoryProvider.value(
       //menggunakan RepositoryProvider agar bisa mengambil repository dengan cara
       //RepositoryProvider.of<AuthRepository>(context) di child bawahnya
       value: _authRepository,
       child: BlocProvider(
         //create: (_) => AuthenticationBloc(
-        create: (_) => AuthCubit(
+        /* create: (_) => AuthCubit(
           authenticationRepository: _authRepository,
           userRepository: _userRepository,
-        ),
+        ), */
+        create: (_) => GetIt.I<AuthCubit>(),
         child: const AppView(),
       ),
     );
-  }
+  } */
 }
 
 class AppView extends StatefulWidget {
