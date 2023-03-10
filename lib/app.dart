@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'config/app_theme.dart';
-import 'features/authentication/data/datasources/auth_remote_data_source.dart';
-import 'features/authentication/data/repositories/auth_repository_impl.dart';
 import 'features/authentication/domain/entities/auth.dart';
 import 'features/authentication/domain/repositories/auth_repository.dart';
-import 'features/authentication/presentation/bloc/authentication_bloc.dart';
 import 'features/authentication/presentation/cubit/auth_cubit.dart';
 import 'features/home/presentasion/pages/home_main.dart';
 import 'features/login/presentation/pages/login_page.dart';
 import 'features/splash/view/splash_page.dart';
-import 'features/user/data/datasources/user_remote_data_source.dart';
-import 'features/user/data/repositories/user_repository_impl.dart';
-import 'features/user/domain/repositories/user_repository.dart';
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
@@ -94,6 +89,8 @@ class _AppViewState extends State<AppView> {
       title: 'Bana App',
       theme: AppTheme.light,
       navigatorKey: _navigatorKey,
+      supportedLocales: AppLocalizations.supportedLocales,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
       builder: (context, child) {
         //return BlocListener<AuthenticationBloc, AuthenticationState>(
         return BlocListener<AuthCubit, AuthState>(

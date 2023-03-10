@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bana_app/utils/colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../size_config.dart';
 import '../../../../authentication/presentation/cubit/auth_cubit.dart';
@@ -12,6 +13,7 @@ class InfoBalance extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       margin: EdgeInsets.symmetric(
         horizontal: getProportionateScreenWidth(20),
@@ -39,12 +41,12 @@ class InfoBalance extends StatelessWidget {
           children: [
             Text.rich(
               TextSpan(
-                text: "Welcome home $userName\n",
+                text: "${l10n.welcomeHome} $userName\n",
                 style: const TextStyle(color: Colors.white),
-                children: const [
+                children: [
                   TextSpan(
-                    text: "Your Deposite Today:",
-                    style: TextStyle(
+                    text: "${l10n.yourDepositeToday} :",
+                    style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
