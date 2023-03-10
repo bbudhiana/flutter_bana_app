@@ -7,6 +7,7 @@ import '/features/login/presentation/models/models.dart';
 import '../../../../utils/colors.dart';
 import '../../../../utils/images.dart';
 import '../../../home/presentasion/pages/home_main.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginWidget extends StatelessWidget {
   const LoginWidget({Key? key}) : super(key: key);
@@ -38,9 +39,9 @@ class LoginWidget extends StatelessWidget {
         },
         child: Column(
           children: [
-            const Padding(padding: EdgeInsets.only(top: 70)),
+            const Padding(padding: EdgeInsets.only(top: 10)),
             SharedImagesPageLogin.homerBankImageLogoTitle,
-            const Padding(padding: EdgeInsets.only(top: 30)),
+            const Padding(padding: EdgeInsets.only(top: 20)),
             Container(
               margin: const EdgeInsets.only(left: 10, right: 10),
               padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 14),
@@ -69,6 +70,7 @@ class _EmailInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return BlocBuilder<LoginBloc, LoginState>(
       buildWhen: (previous, current) => previous.name != current.name,
       builder: (context, state) {
@@ -77,7 +79,8 @@ class _EmailInput extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                "Username",
+                //"Username",
+                l10n.username,
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
                   color: state.name.invalid
@@ -169,6 +172,7 @@ class _PasswordInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return BlocBuilder<LoginBloc, LoginState>(
       buildWhen: (previous, current) =>
           previous.password != current.password ||
@@ -179,7 +183,8 @@ class _PasswordInput extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                "Password",
+                //"Password",
+                l10n.password,
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
                   color: state.password.invalid
@@ -284,6 +289,7 @@ class _LoginButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return BlocBuilder<LoginBloc, LoginState>(
       buildWhen: (previous, current) => previous.status != current.status,
       builder: (context, state) {
@@ -302,7 +308,8 @@ class _LoginButton extends StatelessWidget {
                   backgroundColor: SharedColors.homerBankPrimaryColor,
                   textStyle: const TextStyle(fontSize: 15),
                 ),
-                child: const Text('Login'),
+                //child: const Text('Login'),
+                child: Text(l10n.login),
               );
       },
     );

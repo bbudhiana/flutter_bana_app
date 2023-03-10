@@ -1,5 +1,9 @@
 {
   "welcomeHome": "Selamat Datang ✨",
   "yourDepositeToday": "Deposit Anda Hari ini",
-  "searchProduct": "Cari Produk"
+  "searchProduct": "Cari Produk",
+  "username": "Nama user",
+  "password": "Sandi",
+  "login": "Masuk",
+  "chooseLanguage":"Pilih Preferensi Bahasa"
 }

@@ -1,4 +1,5 @@
 import 'package:flutter_bana_app/features/authentication/presentation/cubit/auth_cubit.dart';
+import 'package:flutter_bana_app/features/language/presentation/bloc/language_bloc.dart';
 import 'package:flutter_bana_app/features/user/domain/usecases/get_current_user.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
@@ -39,6 +40,7 @@ void init() async {
 
   //locator.registerFactory(() => AuthCubit(authenticationRepository: locator(), userRepository: locator()));
   locator.registerFactory(() => AuthCubit(locator(), locator(), locator()));
+  locator.registerFactory(() => LanguageBloc());
 
   locator.registerLazySingleton(() => GetCurrentWeather(locator()));
   locator.registerLazySingleton(() => GetAuthentication(locator()));

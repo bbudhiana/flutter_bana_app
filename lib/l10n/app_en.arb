@@ -1,5 +1,9 @@
 {
   "welcomeHome": "Welcome Home ✨",
   "yourDepositeToday": "Your Deposite Today",
-  "searchProduct": "Search Product"
+  "searchProduct": "Search Product",
+  "username": "Username",
+  "password": "Password",
+  "login": "Login",
+  "chooseLanguage":"Choose Preference Language"
 }

@@ -4,12 +4,15 @@ import 'package:get_it/get_it.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'config/app_theme.dart';
+import 'core/language.dart';
 import 'features/authentication/domain/entities/auth.dart';
 import 'features/authentication/domain/repositories/auth_repository.dart';
 import 'features/authentication/presentation/cubit/auth_cubit.dart';
 import 'features/home/presentasion/pages/home_main.dart';
+import 'features/language/presentation/bloc/language_bloc.dart';
 import 'features/login/presentation/pages/login_page.dart';
 import 'features/splash/view/splash_page.dart';
+import 'utils/colors.dart';
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
@@ -47,8 +50,15 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => GetIt.I<AuthCubit>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => GetIt.I<AuthCubit>(),
+        ),
+        BlocProvider(
+          create: (context) => GetIt.I<LanguageBloc>(),
+        ),
+      ],
       child: const AppView(),
     );
   }
@@ -84,39 +94,47 @@ class _AppViewState extends State<AppView> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Bana App',
-      theme: AppTheme.light,
-      navigatorKey: _navigatorKey,
-      supportedLocales: AppLocalizations.supportedLocales,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      builder: (context, child) {
-        //return BlocListener<AuthenticationBloc, AuthenticationState>(
-        return BlocListener<AuthCubit, AuthState>(
-          listener: (context, state) {
-            print(state.status);
-            switch (state.status) {
-              case AuthenticationStatus.authenticated:
-                _navigator.pushAndRemoveUntil<void>(
-                  HomeMain.route(),
-                  (route) => false,
-                );
-                break;
-              case AuthenticationStatus.unauthenticated:
-                _navigator.pushAndRemoveUntil<void>(
-                  LoginPage.route(),
-                  (route) => false,
-                );
-                break;
-              case AuthenticationStatus.unknown:
-                break;
-            }
+    //final l10n = AppLocalizations.of(context)!;
+    //provider LanguageBloc sudah di set di parent, maka bisa trigger awal dulu Language nya
+    context.read<LanguageBloc>().add(GetLanguage());
+    return BlocBuilder<LanguageBloc, LanguageState>(
+      builder: (context, state) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Bana App',
+          theme: AppTheme.light,
+          navigatorKey: _navigatorKey,
+          locale: state.selectedLanguage.value,
+          supportedLocales: AppLocalizations.supportedLocales,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          builder: (context, child) {
+            //return BlocListener<AuthenticationBloc, AuthenticationState>(
+            return BlocListener<AuthCubit, AuthState>(
+              listener: (context, state) {
+                print(state.status);
+                switch (state.status) {
+                  case AuthenticationStatus.authenticated:
+                    _navigator.pushAndRemoveUntil<void>(
+                      HomeMain.route(),
+                      (route) => false,
+                    );
+                    break;
+                  case AuthenticationStatus.unauthenticated:
+                    _navigator.pushAndRemoveUntil<void>(
+                      LoginPage.route(),
+                      (route) => false,
+                    );
+                    break;
+                  case AuthenticationStatus.unknown:
+                    break;
+                }
+              },
+              child: child,
+            );
           },
-          child: child,
+          onGenerateRoute: (_) => SplashPage.route(),
         );
       },
-      onGenerateRoute: (_) => SplashPage.route(),
     );
   }
 }
