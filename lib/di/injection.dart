@@ -11,11 +11,11 @@ import '../features/authentication/data/datasources/auth_remote_data_source.dart
 import '../features/authentication/data/repositories/auth_repository_impl.dart';
 import '../features/authentication/domain/usecase/get_status.dart';
 import '../features/authentication/domain/usecase/log_in.dart';
-import '../features/login/data/datasources/login_remote_data_source sqlite.dart';
-import '../features/login/data/datasources/login_remote_data_source.dart';
-import '../features/login/data/repositories/login_repository_impl.dart';
-import '../features/login/domain/repositories/login_repository.dart';
-import '../features/login/domain/usecases/get_authentication.dart';
+//import '../features/login/data/datasources/login_remote_data_source sqlite.dart';
+//import '../features/login/data/datasources/login_remote_data_source.dart';
+//import '../features/login/data/repositories/login_repository_impl.dart';
+//import '../features/login/domain/repositories/login_repository.dart';
+//import '../features/login/domain/usecases/get_authentication.dart';
 import '../features/login/presentation/bloc/login/login_bloc.dart';
 import '../features/user/data/datasources/user_remote_data_source.dart';
 import '../features/user/data/repositories/user_repository_impl.dart';
@@ -35,15 +35,14 @@ void init() async {
   locator.registerFactory<LoginBloc>(() => LoginBloc(locator()));
   //locator.registerFactory<LoginBloc>(() => LoginBloc(locator()));
   //locator.registerFactory(() => AuthenticationBloc(authenticationRepository: locator(), userRepository: locator()));
-  locator.registerFactory(
-      () => AuthenticationBloc(locator(), locator(), locator()));
+  locator.registerFactory(() => AuthenticationBloc(locator(), locator(), locator()));
 
   //locator.registerFactory(() => AuthCubit(authenticationRepository: locator(), userRepository: locator()));
   locator.registerFactory(() => AuthCubit(locator(), locator(), locator()));
   locator.registerFactory(() => LanguageBloc());
 
   locator.registerLazySingleton(() => GetCurrentWeather(locator()));
-  locator.registerLazySingleton(() => GetAuthentication(locator()));
+  //locator.registerLazySingleton(() => GetAuthentication(locator()));
   locator.registerLazySingleton(() => GetStatus(locator()));
   locator.registerLazySingleton(() => GetCurrentUser(locator()));
   locator.registerLazySingleton(() => LogOut(locator()));
@@ -55,11 +54,11 @@ void init() async {
     ),
   );
 
-  locator.registerLazySingleton<LoginRepository>(
+  /* locator.registerLazySingleton<LoginRepository>(
     () => LoginRepositoryImpl(
       remoteDataSource: locator(),
     ),
-  );
+  ); */
 
   locator.registerLazySingleton<RemoteDataSource>(
     () => RemoteDataSourceImpl(
@@ -67,7 +66,7 @@ void init() async {
     ),
   );
 
-  locator.registerLazySingleton<LoginRemoteDataSource>(
+  /*  locator.registerLazySingleton<LoginRemoteDataSource>(
     () => LoginRemoteDataSourceImpl(
       client: locator(),
     ),
@@ -75,7 +74,7 @@ void init() async {
 
   locator.registerLazySingleton<LoginRemoteDataSourceSqlite>(
     () => LoginRemoteDataSourceSqliteImpl(),
-  );
+  ); */
 
   locator.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(authRemoteDataSource: locator()),

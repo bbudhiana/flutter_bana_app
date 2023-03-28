@@ -4,9 +4,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 
+import '../../../presentation/models/models.dart';
 import '../../../../authentication/domain/usecase/log_in.dart';
-import '/features/authentication/domain/repositories/auth_repository.dart';
-import '/features/login/presentation/models/models.dart';
 import '../../../../user/domain/entities/user.dart';
 
 part 'login_event.dart';
@@ -27,8 +26,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   //final AuthRepository _authRepository;
   final LogIn _logIn;
 
-  void _onVisibility(
-      VisibilityPasswordChanged event, Emitter<LoginState> emit) {
+  void _onVisibility(VisibilityPasswordChanged event, Emitter<LoginState> emit) {
     emit(state.copyWith(visibility: event.visibility));
   }
 
@@ -75,10 +73,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           ));
         },
         (data) {
-          emit(state.copyWith(
-              status: FormzStatus.submissionSuccess,
-              user: data,
-              responseMessage: "success login"));
+          emit(state.copyWith(status: FormzStatus.submissionSuccess, user: data, responseMessage: "success login"));
         },
       );
     }

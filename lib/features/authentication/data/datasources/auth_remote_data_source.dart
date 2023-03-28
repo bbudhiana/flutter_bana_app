@@ -71,8 +71,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<UserModel> getLogin(String name, String password) async {
     await Future<void>.delayed(const Duration(seconds: 1));
 
-    final responsedata =
-        await helper.getDataUserByNameAndPassword(name, password);
+    final responsedata = await helper.getDataUserByNameAndPassword(name, password);
 
     if (responsedata.isNotEmpty) {
       //input data user di sharedpreferences
