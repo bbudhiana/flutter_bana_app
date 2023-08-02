@@ -16,7 +16,8 @@ class LoginWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<LoginBloc, LoginState>(
         listener: (context, state) {
-          if (state.status.isSubmissionFailure) {
+          //if (state.status.isSubmissionFailure) {
+          if (state.status.isFailure) {
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
               ..showSnackBar(
@@ -25,7 +26,8 @@ class LoginWidget extends StatelessWidget {
                   backgroundColor: const Color.fromARGB(255, 211, 45, 23),
                 ),
               );
-          } else if (state.status.isSubmissionSuccess) {
+            //} else if (state.status.isSubmissionSuccess) {
+          } else if (state.status.isSuccess) {
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
               ..showSnackBar(
@@ -46,9 +48,7 @@ class LoginWidget extends StatelessWidget {
               margin: const EdgeInsets.only(left: 10, right: 10),
               padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 14),
               height: 368,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12.0)),
+              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12.0)),
               child: Column(
                 children: const [
                   _EmailInput(),
@@ -83,9 +83,8 @@ class _EmailInput extends StatelessWidget {
                 l10n.username,
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
-                  color: state.name.invalid
-                      ? SharedColors.homerBankDangerColor
-                      : Colors.black,
+                  //color: state.name.invalid
+                  color: state.name.isValid ? SharedColors.homerBankDangerColor : Colors.black,
                 ),
               ),
             ),
@@ -96,39 +95,27 @@ class _EmailInput extends StatelessWidget {
               borderRadius: BorderRadius.circular(8.0),
               child: TextField(
                 key: const Key('loginForm_NameInput_textField'),
-                onChanged: (name) =>
-                    context.read<LoginBloc>().add(LoginNameChanged(name)),
+                onChanged: (name) => context.read<LoginBloc>().add(LoginNameChanged(name)),
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: SharedColors.homerBankWhiteColor,
                   hintText: "alice or bob",
-                  hintStyle: const TextStyle(
-                      color: SharedColors.homerBankGreyColor,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400),
-                  contentPadding: const EdgeInsets.symmetric(
-                      vertical: 12.0, horizontal: 16.0),
+                  hintStyle: const TextStyle(color: SharedColors.homerBankGreyColor, fontSize: 14, fontWeight: FontWeight.w400),
+                  contentPadding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
                   border: OutlineInputBorder(
-                    borderSide: state.name.invalid
-                        ? const BorderSide(
-                            color: SharedColors.homerBankDangerColor,
-                            width: 2.0)
-                        : BorderSide.none,
+                    //borderSide: state.name.invalid
+                    borderSide: state.name.isNotValid ? const BorderSide(color: SharedColors.homerBankDangerColor, width: 2.0) : BorderSide.none,
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: state.name.invalid
-                        ? const BorderSide(
-                            color: SharedColors.homerBankDangerColor,
-                            width: 2.0)
-                        : const BorderSide(
-                            color: SharedColors.homerBankWhiteColor,
-                            width: 1.0),
+                    //borderSide: state.name.invalid
+                    borderSide: state.name.isNotValid
+                        ? const BorderSide(color: SharedColors.homerBankDangerColor, width: 2.0)
+                        : const BorderSide(color: SharedColors.homerBankWhiteColor, width: 1.0),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                        color: SharedColors.homerBankPrimaryColor, width: 1.0),
+                    borderSide: const BorderSide(color: SharedColors.homerBankPrimaryColor, width: 1.0),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   // errorText:
@@ -142,12 +129,12 @@ class _EmailInput extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                state.name.invalid ? _getErrorName(state.name.error) : '',
+                //state.name.invalid ? _getErrorName(state.name.error) : '',
+                state.name.isNotValid ? _getErrorName(state.name.error) : '',
                 style: TextStyle(
                   fontSize: 10,
-                  color: state.name.invalid
-                      ? SharedColors.homerBankDangerColor
-                      : Colors.green,
+                  //color: state.name.invalid
+                  color: state.name.isNotValid ? SharedColors.homerBankDangerColor : Colors.green,
                 ),
               ),
             ),
@@ -174,9 +161,7 @@ class _PasswordInput extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return BlocBuilder<LoginBloc, LoginState>(
-      buildWhen: (previous, current) =>
-          previous.password != current.password ||
-          previous.visibility != current.visibility,
+      buildWhen: (previous, current) => previous.password != current.password || previous.visibility != current.visibility,
       builder: (context, state) {
         return Column(
           children: [
@@ -187,9 +172,8 @@ class _PasswordInput extends StatelessWidget {
                 l10n.password,
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
-                  color: state.password.invalid
-                      ? SharedColors.homerBankDangerColor
-                      : Colors.black,
+                  //color: state.password.invalid
+                  color: state.password.isNotValid ? SharedColors.homerBankDangerColor : Colors.black,
                 ),
               ),
             ),
@@ -200,48 +184,33 @@ class _PasswordInput extends StatelessWidget {
               borderRadius: BorderRadius.circular(8.0),
               child: TextField(
                 key: const Key('loginForm_passwordInput_textField'),
-                onChanged: (password) => context
-                    .read<LoginBloc>()
-                    .add(LoginPasswordChanged(password)),
+                onChanged: (password) => context.read<LoginBloc>().add(LoginPasswordChanged(password)),
                 obscureText: !state.visibility,
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white70,
                   hintText: "alice123 or bob123",
-                  hintStyle: const TextStyle(
-                      color: SharedColors.homerBankGreyColor, fontSize: 14),
-                  contentPadding: const EdgeInsets.symmetric(
-                      vertical: 12.0, horizontal: 16.0),
+                  hintStyle: const TextStyle(color: SharedColors.homerBankGreyColor, fontSize: 14),
+                  contentPadding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
                   border: OutlineInputBorder(
-                    borderSide: state.password.invalid
-                        ? const BorderSide(
-                            color: SharedColors.homerBankDangerColor,
-                            width: 2.0)
-                        : BorderSide.none,
+                    //borderSide: state.password.invalid
+                    borderSide: state.password.isNotValid ? const BorderSide(color: SharedColors.homerBankDangerColor, width: 2.0) : BorderSide.none,
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: state.password.invalid
-                        ? const BorderSide(
-                            color: SharedColors.homerBankDangerColor,
-                            width: 2.0)
-                        : const BorderSide(
-                            color: SharedColors.homerBankWhiteColor,
-                            width: 1.0),
+                    //borderSide: state.password.invalid
+                    borderSide: state.password.isNotValid
+                        ? const BorderSide(color: SharedColors.homerBankDangerColor, width: 2.0)
+                        : const BorderSide(color: SharedColors.homerBankWhiteColor, width: 1.0),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                        color: SharedColors.homerBankPrimaryColor, width: 1.0),
+                    borderSide: const BorderSide(color: SharedColors.homerBankPrimaryColor, width: 1.0),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   suffixIcon: InkWell(
-                    onTap: () => context
-                        .read<LoginBloc>()
-                        .add(VisibilityPasswordChanged(!state.visibility)),
-                    child: Icon(state.visibility == true
-                        ? Icons.visibility_off
-                        : Icons.visibility),
+                    onTap: () => context.read<LoginBloc>().add(VisibilityPasswordChanged(!state.visibility)),
+                    child: Icon(state.visibility == true ? Icons.visibility_off : Icons.visibility),
                   ),
                   // errorText: state.password.invalid
                   //     ? _getErrorPassword(state.password.error)
@@ -255,14 +224,12 @@ class _PasswordInput extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                state.password.invalid
-                    ? _getErrorPassword(state.password.error)
-                    : '',
+                //state.password.invalid
+                state.password.isNotValid ? _getErrorPassword(state.password.error) : '',
                 style: TextStyle(
                   fontSize: 10,
-                  color: state.password.invalid
-                      ? SharedColors.homerBankDangerColor
-                      : Colors.green,
+                  //color: state.password.invalid
+                  color: state.password.isNotValid ? SharedColors.homerBankDangerColor : Colors.green,
                 ),
               ),
             ),
@@ -293,11 +260,13 @@ class _LoginButton extends StatelessWidget {
     return BlocBuilder<LoginBloc, LoginState>(
       buildWhen: (previous, current) => previous.status != current.status,
       builder: (context, state) {
-        return state.status.isSubmissionInProgress
+        //return state.status.isSubmissionInProgress
+        return state.status.isInProgress
             ? const CircularProgressIndicator()
             : ElevatedButton(
                 key: const Key('loginForm_buttonLogin_raisedButton'),
-                onPressed: state.status.isValidated
+                //onPressed: state.status.isValidated
+                onPressed: state.isValid
                     ? () {
                         context.read<LoginBloc>().add(const LoginSubmitted());
                         FocusScope.of(context).unfocus();

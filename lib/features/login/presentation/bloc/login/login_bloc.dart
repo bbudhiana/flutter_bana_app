@@ -37,7 +37,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     final name = Name.dirty(event.name);
     emit(state.copyWith(
       name: name,
-      status: Formz.validate([state.password, name]),
+      isValid: Formz.validate([state.password, name]),
     ));
   }
 
@@ -48,7 +48,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     final password = Password.dirty(event.password);
     emit(state.copyWith(
       password: password,
-      status: Formz.validate([password, state.name]),
+      isValid: Formz.validate([password, state.name]),
     ));
   }
 
@@ -56,8 +56,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     LoginSubmitted event,
     Emitter<LoginState> emit,
   ) async {
-    if (state.status.isValidated) {
-      emit(state.copyWith(status: FormzStatus.submissionInProgress));
+    if (state.isValid) {
+      emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
 
       /* final res = await _getAuthentication.execute(
           state.name.value, state.password.value);
@@ -68,12 +68,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       res.fold(
         (failure) {
           emit(state.copyWith(
-            status: FormzStatus.submissionFailure,
+            status: FormzSubmissionStatus.failure,
             responseMessage: failure.message,
           ));
         },
         (data) {
-          emit(state.copyWith(status: FormzStatus.submissionSuccess, user: data, responseMessage: "success login"));
+          emit(state.copyWith(status: FormzSubmissionStatus.success, user: data, responseMessage: "success login"));
         },
       );
     }
