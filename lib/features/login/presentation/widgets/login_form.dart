@@ -93,7 +93,7 @@ class _LoginButton extends StatelessWidget {
                     ? () {
                         context.read<LoginBloc>().add(const LoginSubmitted());
                       }
-                    : null,
+                    : (null),
                 child: const Text('Login'),
               );
       },
