@@ -11,10 +11,8 @@ class Name extends FormzInput<String, NameValidationError> {
 
   @override
   NameValidationError? validator(String value) {
-    if (value.isEmpty) {
-      return NameValidationError.empty;
-    }
-
+    if (value.isEmpty) return NameValidationError.empty;
+    return null;
     //return _emailRegExp.hasMatch(value) ? null : EmailValidationError.invalid;
   }
 }

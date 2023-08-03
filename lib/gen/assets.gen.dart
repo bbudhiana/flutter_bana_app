@@ -27,7 +27,8 @@ class $AssetsIconsGen {
   SvgGenImage get call => const SvgGenImage('assets/icons/Call.svg');
 
   /// File path: assets/icons/Camera Icon.svg
-  SvgGenImage get cameraIcon => const SvgGenImage('assets/icons/Camera Icon.svg');
+  SvgGenImage get cameraIcon =>
+      const SvgGenImage('assets/icons/Camera Icon.svg');
 
   /// File path: assets/icons/Cart Icon.svg
   SvgGenImage get cartIcon => const SvgGenImage('assets/icons/Cart Icon.svg');
@@ -36,16 +37,19 @@ class $AssetsIconsGen {
   SvgGenImage get cash => const SvgGenImage('assets/icons/Cash.svg');
 
   /// File path: assets/icons/Chat bubble Icon.svg
-  SvgGenImage get chatBubbleIcon => const SvgGenImage('assets/icons/Chat bubble Icon.svg');
+  SvgGenImage get chatBubbleIcon =>
+      const SvgGenImage('assets/icons/Chat bubble Icon.svg');
 
   /// File path: assets/icons/Check mark rounde.svg
-  SvgGenImage get checkMarkRounde => const SvgGenImage('assets/icons/Check mark rounde.svg');
+  SvgGenImage get checkMarkRounde =>
+      const SvgGenImage('assets/icons/Check mark rounde.svg');
 
   /// File path: assets/icons/Close.svg
   SvgGenImage get close => const SvgGenImage('assets/icons/Close.svg');
 
   /// File path: assets/icons/Conversation.svg
-  SvgGenImage get conversation => const SvgGenImage('assets/icons/Conversation.svg');
+  SvgGenImage get conversation =>
+      const SvgGenImage('assets/icons/Conversation.svg');
 
   /// File path: assets/icons/Discover.svg
   SvgGenImage get discover => const SvgGenImage('assets/icons/Discover.svg');
@@ -66,10 +70,12 @@ class $AssetsIconsGen {
   SvgGenImage get heartIcon => const SvgGenImage('assets/icons/Heart Icon.svg');
 
   /// File path: assets/icons/Heart Icon_2.svg
-  SvgGenImage get heartIcon2 => const SvgGenImage('assets/icons/Heart Icon_2.svg');
+  SvgGenImage get heartIcon2 =>
+      const SvgGenImage('assets/icons/Heart Icon_2.svg');
 
   /// File path: assets/icons/Location point.svg
-  SvgGenImage get locationPoint => const SvgGenImage('assets/icons/Location point.svg');
+  SvgGenImage get locationPoint =>
+      const SvgGenImage('assets/icons/Location point.svg');
 
   /// File path: assets/icons/Lock.svg
   SvgGenImage get lock => const SvgGenImage('assets/icons/Lock.svg');
@@ -90,10 +96,12 @@ class $AssetsIconsGen {
   SvgGenImage get plusIcon => const SvgGenImage('assets/icons/Plus Icon.svg');
 
   /// File path: assets/icons/Question mark.svg
-  SvgGenImage get questionMark => const SvgGenImage('assets/icons/Question mark.svg');
+  SvgGenImage get questionMark =>
+      const SvgGenImage('assets/icons/Question mark.svg');
 
   /// File path: assets/icons/Search Icon.svg
-  SvgGenImage get searchIcon => const SvgGenImage('assets/icons/Search Icon.svg');
+  SvgGenImage get searchIcon =>
+      const SvgGenImage('assets/icons/Search Icon.svg');
 
   /// File path: assets/icons/Settings.svg
   SvgGenImage get settings => const SvgGenImage('assets/icons/Settings.svg');
@@ -117,13 +125,15 @@ class $AssetsIconsGen {
   SvgGenImage get user => const SvgGenImage('assets/icons/User.svg');
 
   /// File path: assets/icons/arrow_right.svg
-  SvgGenImage get arrowRight => const SvgGenImage('assets/icons/arrow_right.svg');
+  SvgGenImage get arrowRight =>
+      const SvgGenImage('assets/icons/arrow_right.svg');
 
   /// File path: assets/icons/facebook-2.svg
   SvgGenImage get facebook2 => const SvgGenImage('assets/icons/facebook-2.svg');
 
   /// File path: assets/icons/google-icon.svg
-  SvgGenImage get googleIcon => const SvgGenImage('assets/icons/google-icon.svg');
+  SvgGenImage get googleIcon =>
+      const SvgGenImage('assets/icons/google-icon.svg');
 
   /// File path: assets/icons/receipt.svg
   SvgGenImage get receipt => const SvgGenImage('assets/icons/receipt.svg');
@@ -183,37 +193,47 @@ class $AssetsImagesGen {
   const $AssetsImagesGen();
 
   /// File path: assets/images/History_off.png
-  AssetGenImage get historyOff => const AssetGenImage('assets/images/History_off.png');
+  AssetGenImage get historyOff =>
+      const AssetGenImage('assets/images/History_off.png');
 
   /// File path: assets/images/History_on.png
-  AssetGenImage get historyOn => const AssetGenImage('assets/images/History_on.png');
+  AssetGenImage get historyOn =>
+      const AssetGenImage('assets/images/History_on.png');
 
   /// File path: assets/images/Home_off.png
-  AssetGenImage get homeOff => const AssetGenImage('assets/images/Home_off.png');
+  AssetGenImage get homeOff =>
+      const AssetGenImage('assets/images/Home_off.png');
 
   /// File path: assets/images/Home_on.png
   AssetGenImage get homeOn => const AssetGenImage('assets/images/Home_on.png');
 
   /// File path: assets/images/Homer_Bank.png
-  AssetGenImage get homerBank => const AssetGenImage('assets/images/Homer_Bank.png');
+  AssetGenImage get homerBank =>
+      const AssetGenImage('assets/images/Homer_Bank.png');
 
   /// File path: assets/images/Homer_Bank_logo.png
-  AssetGenImage get homerBankLogo => const AssetGenImage('assets/images/Homer_Bank_logo.png');
+  AssetGenImage get homerBankLogo =>
+      const AssetGenImage('assets/images/Homer_Bank_logo.png');
 
   /// File path: assets/images/Homer_Bank_titlelogin.png
-  AssetGenImage get homerBankTitlelogin => const AssetGenImage('assets/images/Homer_Bank_titlelogin.png');
+  AssetGenImage get homerBankTitlelogin =>
+      const AssetGenImage('assets/images/Homer_Bank_titlelogin.png');
 
   /// File path: assets/images/Transaction_off.png
-  AssetGenImage get transactionOff => const AssetGenImage('assets/images/Transaction_off.png');
+  AssetGenImage get transactionOff =>
+      const AssetGenImage('assets/images/Transaction_off.png');
 
   /// File path: assets/images/Transaction_on.png
-  AssetGenImage get transactionOn => const AssetGenImage('assets/images/Transaction_on.png');
+  AssetGenImage get transactionOn =>
+      const AssetGenImage('assets/images/Transaction_on.png');
 
   /// File path: assets/images/splash_screen.png
-  AssetGenImage get splashScreen => const AssetGenImage('assets/images/splash_screen.png');
+  AssetGenImage get splashScreen =>
+      const AssetGenImage('assets/images/splash_screen.png');
 
   /// File path: assets/images/splash_screen_homer.png
-  AssetGenImage get splashScreenHomer => const AssetGenImage('assets/images/splash_screen_homer.png');
+  AssetGenImage get splashScreenHomer =>
+      const AssetGenImage('assets/images/splash_screen_homer.png');
 
   /// List of all assets
   List<AssetGenImage> get values => [
@@ -303,7 +323,16 @@ class AssetGenImage {
     );
   }
 
-  ImageProvider provider() => AssetImage(_assetName);
+  ImageProvider provider({
+    AssetBundle? bundle,
+    String? package,
+  }) {
+    return AssetImage(
+      _assetName,
+      bundle: bundle,
+      package: package,
+    );
+  }
 
   String get path => _assetName;
 
@@ -330,9 +359,9 @@ class SvgGenImage {
     bool excludeFromSemantics = false,
     SvgTheme theme = const SvgTheme(),
     ColorFilter? colorFilter,
+    Clip clipBehavior = Clip.hardEdge,
     @deprecated Color? color,
     @deprecated BlendMode colorBlendMode = BlendMode.srcIn,
-    @deprecated Clip? clipBehavior,
     @deprecated bool cacheColorFilter = false,
   }) {
     return SvgPicture.asset(
@@ -353,7 +382,7 @@ class SvgGenImage {
       colorFilter: colorFilter,
       color: color,
       colorBlendMode: colorBlendMode,
-      clipBehavior: clipBehavior = Clip.hardEdge,
+      clipBehavior: clipBehavior,
       cacheColorFilter: cacheColorFilter,
     );
   }

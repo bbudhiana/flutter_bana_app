@@ -3,13 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get_it/get_it.dart';
 
-import '../../../../gen/assets.gen.dart';
 import '/config/app_theme.dart';
 import '/core/responsive.dart';
 import '/core/widgets/shared_safe_area_widget.dart';
 import '/features/login/presentation/bloc/login/login_bloc.dart';
 import '/features/login/presentation/widgets/login_widget.dart';
 import '../../../../core/language.dart';
+import '../../../../gen/assets.gen.dart';
 import '../../../../size_config.dart';
 import '../../../../utils/colors.dart';
 import '../../../../utils/images.dart';
@@ -64,8 +64,7 @@ class _LoginPageState extends State<LoginPage> {
                                   selectedLanguage: Language.values[index],
                                 ),
                               );
-                          Future.delayed(const Duration(milliseconds: 300))
-                              .then((value) => Navigator.of(context).pop());
+                          Future.delayed(const Duration(milliseconds: 300)).then((value) => Navigator.of(context).pop());
                         },
                         leading: ClipOval(
                           child: Language.values[index].image.image(
@@ -74,26 +73,19 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         title: Text(Language.values[index].text),
-                        trailing:
-                            Language.values[index] == state.selectedLanguage
-                                ? const Icon(
-                                    Icons.check_circle_rounded,
-                                    color: SharedColors.homerBankPrimaryColor,
-                                  )
-                                : null,
+                        trailing: Language.values[index] == state.selectedLanguage
+                            ? const Icon(
+                                Icons.check_circle_rounded,
+                                color: SharedColors.homerBankPrimaryColor,
+                              )
+                            : null,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
                           side: Language.values[index] == state.selectedLanguage
-                              ? const BorderSide(
-                                  color: SharedColors.homerBankPrimaryColor,
-                                  width: 1.5)
+                              ? const BorderSide(color: SharedColors.homerBankPrimaryColor, width: 1.5)
                               : BorderSide(color: Colors.grey[300]!),
                         ),
-                        tileColor:
-                            Language.values[index] == state.selectedLanguage
-                                ? SharedColors.homerBankPrimaryColor
-                                    .withOpacity(0.05)
-                                : null,
+                        tileColor: Language.values[index] == state.selectedLanguage ? SharedColors.homerBankPrimaryColor.withOpacity(0.05) : null,
                       );
                     },
                     separatorBuilder: (context, index) {
@@ -126,8 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                 vertical: 8.0,
               ),
               child: OutlinedButton(
-                onPressed: () =>
-                    showLanguageBottomSheet(context), // #2 Function call
+                onPressed: () => showLanguageBottomSheet(context), // #2 Function call
                 style: OutlinedButton.styleFrom(
                   padding: const EdgeInsets.all(8.0),
                   foregroundColor: SharedColors.homerBankGreyColor,

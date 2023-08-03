@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:formz/formz.dart';
 
 import '/features/login/presentation/bloc/login/login_bloc.dart';
@@ -7,7 +8,6 @@ import '/features/login/presentation/models/models.dart';
 import '../../../../utils/colors.dart';
 import '../../../../utils/images.dart';
 import '../../../home/presentasion/pages/home_main.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginWidget extends StatelessWidget {
   const LoginWidget({Key? key}) : super(key: key);
@@ -15,53 +15,54 @@ class LoginWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<LoginBloc, LoginState>(
-        listener: (context, state) {
-          //if (state.status.isSubmissionFailure) {
-          if (state.status.isFailure) {
-            ScaffoldMessenger.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(
-                SnackBar(
-                  content: Text(state.responseMessage),
-                  backgroundColor: const Color.fromARGB(255, 211, 45, 23),
-                ),
-              );
-            //} else if (state.status.isSubmissionSuccess) {
-          } else if (state.status.isSuccess) {
-            ScaffoldMessenger.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(
-                SnackBar(
-                  content: Text(state.responseMessage),
-                  backgroundColor: Colors.green,
-                ),
-              );
-            Navigator.pushReplacementNamed(context, HomeMain.routeString);
-          }
-        },
-        child: Column(
-          children: [
-            const Padding(padding: EdgeInsets.only(top: 10)),
-            SharedImagesPageLogin.homerBankImageLogoTitle,
-            const Padding(padding: EdgeInsets.only(top: 20)),
-            Container(
-              margin: const EdgeInsets.only(left: 10, right: 10),
-              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 14),
-              height: 368,
-              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12.0)),
-              child: Column(
-                children: const [
-                  _EmailInput(),
-                  Padding(padding: EdgeInsets.only(top: 20)),
-                  _PasswordInput(),
-                  Padding(padding: EdgeInsets.only(top: 24)),
-                  _LoginButton(),
-                ],
+      listener: (context, state) {
+        //if (state.status.isSubmissionFailure) {
+        if (state.status.isFailure) {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(
+                content: Text(state.responseMessage),
+                backgroundColor: const Color.fromARGB(255, 211, 45, 23),
               ),
+            );
+          //} else if (state.status.isSubmissionSuccess) {
+        } else if (state.status.isSuccess) {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(
+                content: Text(state.responseMessage),
+                backgroundColor: Colors.green,
+              ),
+            );
+          Navigator.pushReplacementNamed(context, HomeMain.routeString);
+        }
+      },
+      child: Column(
+        children: [
+          const Padding(padding: EdgeInsets.only(top: 10)),
+          SharedImagesPageLogin.homerBankImageLogoTitle,
+          const Padding(padding: EdgeInsets.only(top: 20)),
+          Container(
+            margin: const EdgeInsets.only(left: 10, right: 10),
+            padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 14),
+            height: 368,
+            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12.0)),
+            child: const Column(
+              children: [
+                _EmailInput(),
+                Padding(padding: EdgeInsets.only(top: 20)),
+                _PasswordInput(),
+                Padding(padding: EdgeInsets.only(top: 24)),
+                _LoginButton(),
+              ],
             ),
-            const Padding(padding: EdgeInsets.only(top: 24)),
-          ],
-        ));
+          ),
+          const Padding(padding: EdgeInsets.only(top: 24)),
+        ],
+      ),
+    );
   }
 }
 
@@ -84,7 +85,8 @@ class _EmailInput extends StatelessWidget {
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
                   //color: state.name.invalid
-                  color: state.name.isValid ? SharedColors.homerBankDangerColor : Colors.black,
+                  //color: state.name.isNotValid ? SharedColors.homerBankDangerColor : Colors.black,
+                  color: state.name.displayError != null ? SharedColors.homerBankDangerColor : Colors.black,
                 ),
               ),
             ),
@@ -104,12 +106,15 @@ class _EmailInput extends StatelessWidget {
                   contentPadding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
                   border: OutlineInputBorder(
                     //borderSide: state.name.invalid
-                    borderSide: state.name.isNotValid ? const BorderSide(color: SharedColors.homerBankDangerColor, width: 2.0) : BorderSide.none,
+                    //borderSide: state.name.isNotValid ? const BorderSide(color: SharedColors.homerBankDangerColor, width: 2.0) : BorderSide.none,
+                    borderSide:
+                        state.name.displayError != null ? const BorderSide(color: SharedColors.homerBankDangerColor, width: 2.0) : BorderSide.none,
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   enabledBorder: OutlineInputBorder(
                     //borderSide: state.name.invalid
-                    borderSide: state.name.isNotValid
+                    //borderSide: state.name.isNotValid
+                    borderSide: state.name.displayError != null
                         ? const BorderSide(color: SharedColors.homerBankDangerColor, width: 2.0)
                         : const BorderSide(color: SharedColors.homerBankWhiteColor, width: 1.0),
                     borderRadius: BorderRadius.circular(8.0),
@@ -130,11 +135,13 @@ class _EmailInput extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Text(
                 //state.name.invalid ? _getErrorName(state.name.error) : '',
-                state.name.isNotValid ? _getErrorName(state.name.error) : '',
+                //state.name.isNotValid ? _getErrorName(state.name.error) : '',
+                state.name.displayError != null ? _getErrorName(state.name.error) : '',
                 style: TextStyle(
                   fontSize: 10,
                   //color: state.name.invalid
-                  color: state.name.isNotValid ? SharedColors.homerBankDangerColor : Colors.green,
+                  //color: state.name.isNotValid ? SharedColors.homerBankDangerColor : Colors.green,
+                  color: state.name.displayError != null ? SharedColors.homerBankDangerColor : Colors.green,
                 ),
               ),
             ),
@@ -144,10 +151,11 @@ class _EmailInput extends StatelessWidget {
     );
   }
 
+  //guard role name
   String _getErrorName(NameValidationError? err) {
     switch (err) {
       case NameValidationError.empty:
-        return "user can\'t be empty";
+        return "user can't be empty";
       default:
         return "";
     }
@@ -173,7 +181,8 @@ class _PasswordInput extends StatelessWidget {
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
                   //color: state.password.invalid
-                  color: state.password.isNotValid ? SharedColors.homerBankDangerColor : Colors.black,
+                  //color: state.password.isNotValid ? SharedColors.homerBankDangerColor : Colors.black,
+                  color: state.password.displayError != null ? SharedColors.homerBankDangerColor : Colors.black,
                 ),
               ),
             ),
@@ -194,12 +203,16 @@ class _PasswordInput extends StatelessWidget {
                   contentPadding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
                   border: OutlineInputBorder(
                     //borderSide: state.password.invalid
-                    borderSide: state.password.isNotValid ? const BorderSide(color: SharedColors.homerBankDangerColor, width: 2.0) : BorderSide.none,
+                    //borderSide: state.password.isNotValid ? const BorderSide(color: SharedColors.homerBankDangerColor, width: 2.0) : BorderSide.none,
+                    borderSide: state.password.displayError != null
+                        ? const BorderSide(color: SharedColors.homerBankDangerColor, width: 2.0)
+                        : BorderSide.none,
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   enabledBorder: OutlineInputBorder(
                     //borderSide: state.password.invalid
-                    borderSide: state.password.isNotValid
+                    //borderSide: state.password.isNotValid
+                    borderSide: state.password.displayError != null
                         ? const BorderSide(color: SharedColors.homerBankDangerColor, width: 2.0)
                         : const BorderSide(color: SharedColors.homerBankWhiteColor, width: 1.0),
                     borderRadius: BorderRadius.circular(8.0),
@@ -225,11 +238,13 @@ class _PasswordInput extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Text(
                 //state.password.invalid
-                state.password.isNotValid ? _getErrorPassword(state.password.error) : '',
+                //state.password.isNotValid ? _getErrorPassword(state.password.error) : '',
+                state.password.displayError != null ? _getErrorPassword(state.password.error) : '',
                 style: TextStyle(
                   fontSize: 10,
                   //color: state.password.invalid
-                  color: state.password.isNotValid ? SharedColors.homerBankDangerColor : Colors.green,
+                  //color: state.password.isNotValid ? SharedColors.homerBankDangerColor : Colors.green,
+                  color: state.password.displayError != null ? SharedColors.homerBankDangerColor : Colors.green,
                 ),
               ),
             ),
@@ -239,6 +254,7 @@ class _PasswordInput extends StatelessWidget {
     );
   }
 
+  //guard role password
   String _getErrorPassword(PasswordValidationError? err) {
     switch (err) {
       case PasswordValidationError.empty:
@@ -258,7 +274,7 @@ class _LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return BlocBuilder<LoginBloc, LoginState>(
-      buildWhen: (previous, current) => previous.status != current.status,
+      //buildWhen: (previous, current) => previous.status != current.status,
       builder: (context, state) {
         //return state.status.isSubmissionInProgress
         return state.status.isInProgress
