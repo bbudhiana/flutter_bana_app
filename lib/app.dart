@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bana_app/config/app_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 
 import 'config/app_theme.dart';
 import 'core/language.dart';
@@ -100,6 +102,8 @@ class _AppViewState extends State<AppView> {
     return BlocBuilder<LanguageBloc, LanguageState>(
       builder: (context, state) {
         return MaterialApp(
+          //return MaterialApp.router(
+          //routerConfig: AppRoute.routes,
           debugShowCheckedModeBanner: false,
           title: 'Bana App',
           theme: AppTheme.light,
@@ -118,12 +122,14 @@ class _AppViewState extends State<AppView> {
                       HomeMain.route(),
                       (route) => false,
                     );
+                    //context.go('/');
                     break;
                   case AuthenticationStatus.unauthenticated:
                     _navigator.pushAndRemoveUntil<void>(
                       LoginPage.route(),
                       (route) => false,
                     );
+                    //context.goNamed('login');
                     break;
                   case AuthenticationStatus.unknown:
                     break;

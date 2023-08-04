@@ -33,7 +33,7 @@ dependencies:
   collection: ^1.17.1
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
-  dio: ^5.0.0
+  dio: ^5.3.2
   equatable: ^2.0.5
   flutter:
     sdk: flutter
@@ -50,7 +50,7 @@ dependencies:
   path: ^1.8.2
   path_provider: ^2.0.12
   rxdart: ^0.27.7
-  shared_preferences: ^2.1.1
+  shared_preferences: ^2.2.0
   smooth_page_indicator: ^1.0.1
   sqflite: ^2.2.4+1
 
