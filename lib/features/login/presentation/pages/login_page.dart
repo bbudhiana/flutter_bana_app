@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bana_app/config/app_route_constant.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 
 import '/config/app_theme.dart';
 import '/core/responsive.dart';
@@ -64,7 +66,16 @@ class _LoginPageState extends State<LoginPage> {
                                   selectedLanguage: Language.values[index],
                                 ),
                               );
-                          Future.delayed(const Duration(milliseconds: 300)).then((value) => Navigator.of(context).pop());
+                          //Navigator.of(context).pop();
+                          //context.pushNamed(AppRouteConstant.loginRoute);
+                          //Future.delayed(const Duration(milliseconds: 300)).then((value) => Navigator.of(context, rootNavigator: true).pop());
+                          Future.delayed(const Duration(milliseconds: 300)).then((value) => Navigator.pop(context));
+                          //Future.delayed(const Duration(milliseconds: 300)).then((value) => context.pop());
+                          //Future.delayed(const Duration(milliseconds: 300)).then((value) => context.pushNamed(AppRouteConstant.loginRoute));
+                          /* Future.delayed(const Duration(milliseconds: 300)).then((value) {
+                            Navigator.of(context).pop();
+                            context.pushNamed(AppRouteConstant.loginRoute);
+                          }); */
                         },
                         leading: ClipOval(
                           child: Language.values[index].image.image(

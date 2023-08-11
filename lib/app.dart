@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bana_app/config/app_route.dart';
+import 'package:flutter_bana_app/features/authentication/domain/usecase/get_status.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -9,6 +10,7 @@ import 'config/app_theme.dart';
 import 'core/language.dart';
 import 'features/authentication/domain/entities/auth.dart';
 import 'features/authentication/domain/repositories/auth_repository.dart';
+import 'features/authentication/presentation/bloc/authentication_bloc.dart';
 import 'features/authentication/presentation/cubit/auth_cubit.dart';
 import 'features/home/presentasion/pages/home_main.dart';
 import 'features/language/presentation/bloc/language_bloc.dart';
@@ -103,7 +105,9 @@ class _AppViewState extends State<AppView> {
       builder: (context, state) {
         return MaterialApp(
           //return MaterialApp.router(
-          //routerConfig: AppRoute.routes,
+          //routeInformationParser: AppRoute.router.routeInformationParser,
+          //routerDelegate: AppRoute.router.routerDelegate,
+          //routerConfig: AppRoute.router,
           debugShowCheckedModeBanner: false,
           title: 'Bana App',
           theme: AppTheme.light,
@@ -140,6 +144,29 @@ class _AppViewState extends State<AppView> {
           },
           onGenerateRoute: (_) => SplashPage.route(),
         );
+        /* Locale langNow = state.selectedLanguage.value;
+        return BlocBuilder<AuthCubit, AuthState>(
+          builder: (context, state) => MaterialApp.router(
+            routerConfig: AppRoute.getRouter(state.status),
+            debugShowCheckedModeBanner: false,
+            title: 'Bana App',
+            theme: AppTheme.light,
+            locale: langNow,
+            supportedLocales: AppLocalizations.supportedLocales,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+          ),
+        ); */
+        /* return BlocListener<AuthCubit, AuthState>(
+          listener: (context, state) => MaterialApp.router(
+            routerConfig: AppRoute.getRouter(state.status),
+            debugShowCheckedModeBanner: false,
+            title: 'Bana App',
+            theme: AppTheme.light,
+            locale: langNow,
+            supportedLocales: AppLocalizations.supportedLocales,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+          ),
+        ); */
       },
     );
   }

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../authentication/domain/repositories/auth_repository.dart';
-import '../bloc/bloc/home_bloc.dart';
 import '/core/pages.dart';
 import '/core/widgets/shared_safe_area_widget.dart';
 import '/features/home/presentasion/widgets/popup_widget.dart';
@@ -22,8 +19,7 @@ class HomeMain extends StatefulWidget {
   State<HomeMain> createState() => _HomeMainState();
 }
 
-class _HomeMainState extends State<HomeMain>
-    with SingleTickerProviderStateMixin {
+class _HomeMainState extends State<HomeMain> with SingleTickerProviderStateMixin {
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
@@ -62,20 +58,14 @@ class _HomeMainState extends State<HomeMain>
             unselectedItemColor: Colors.grey,
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                  icon: SharedImagesBottomNavigation.homeOff,
-                  activeIcon: SharedImagesBottomNavigation.homeOn,
-                  label: 'Home',
-                  tooltip: ''),
+                  icon: SharedImagesBottomNavigation.homeOff, activeIcon: SharedImagesBottomNavigation.homeOn, label: 'Home', tooltip: ''),
               BottomNavigationBarItem(
                   icon: SharedImagesBottomNavigation.transactionOff,
                   activeIcon: SharedImagesBottomNavigation.transactionOn,
                   label: 'Transfer',
                   tooltip: ''),
               BottomNavigationBarItem(
-                  icon: SharedImagesBottomNavigation.historyOff,
-                  activeIcon: SharedImagesBottomNavigation.historyOn,
-                  label: 'History',
-                  tooltip: ''),
+                  icon: SharedImagesBottomNavigation.historyOff, activeIcon: SharedImagesBottomNavigation.historyOn, label: 'History', tooltip: ''),
             ],
             currentIndex: _selectedIndex,
             selectedItemColor: SharedColors.homerBankPrimaryColor,

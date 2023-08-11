@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bana_app/config/app_route_constant.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:formz/formz.dart';
+import 'package:go_router/go_router.dart';
 
 import '/features/login/presentation/bloc/login/login_bloc.dart';
 import '/features/login/presentation/models/models.dart';
@@ -37,6 +39,7 @@ class LoginWidget extends StatelessWidget {
               ),
             );
           Navigator.pushReplacementNamed(context, HomeMain.routeString);
+          //context.goNamed(AppRouteConstant.homeRoute);
         }
       },
       child: Column(
