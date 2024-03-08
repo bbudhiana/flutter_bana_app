@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bana_app/config/app_route_constant.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../features/authentication/domain/entities/auth.dart';
-import '../features/authentication/presentation/cubit/auth_cubit.dart';
 import '../features/home/presentasion/pages/home_main.dart';
 import '../features/login/presentation/pages/login_page.dart';
 import '../features/splash/view/splash_page.dart';

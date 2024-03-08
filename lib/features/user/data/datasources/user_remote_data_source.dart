@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../utils/datasource/db_helper.dart';
 import '../../../../utils/datasource/prefs.dart';

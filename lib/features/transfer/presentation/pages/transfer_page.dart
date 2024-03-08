@@ -10,9 +10,9 @@ class TransferPage extends StatefulWidget {
 class _TransferPageState extends State<TransferPage> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return const SingleChildScrollView(
       child: Column(
-        children: const [
+        children: [
           Padding(padding: EdgeInsets.only(top: 39)),
         ],
       ),

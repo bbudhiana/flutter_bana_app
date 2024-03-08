@@ -43,7 +43,7 @@ class SharedTextFieldWidget<T> extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: Text(
             label,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.w400,
               fontSize: 16,
               /* color: invalid! || validatorType == ComparePassword.invalid
@@ -102,7 +102,7 @@ class SharedTextFieldWidget<T> extends StatelessWidget {
         const SizedBox(
           height: 5,
         ),
-        Align(
+        const Align(
           alignment: Alignment.centerLeft,
           /* child: invalid! || validatorType == ComparePassword.invalid
               ? Text(

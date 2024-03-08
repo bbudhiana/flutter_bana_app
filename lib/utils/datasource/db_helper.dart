@@ -1,9 +1,7 @@
-import 'package:collection/collection.dart';
 import '/utils/datasource/query/history_query.dart';
 import '/utils/datasource/query/user_query.dart';
 import 'package:sqflite/sqflite.dart' as sqlite;
 import 'package:sqflite/sqflite.dart';
-import 'package:sqflite/sqlite_api.dart';
 import 'package:path/path.dart' as path;
 
 class DbHelper {

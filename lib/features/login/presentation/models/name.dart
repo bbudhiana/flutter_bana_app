@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:formz/formz.dart';
 
 enum NameValidationError { empty }

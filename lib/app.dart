@@ -1,22 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bana_app/config/app_route.dart';
-import 'package:flutter_bana_app/features/authentication/domain/usecase/get_status.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:go_router/go_router.dart';
 
 import 'config/app_theme.dart';
-import 'core/language.dart';
 import 'features/authentication/domain/entities/auth.dart';
 import 'features/authentication/domain/repositories/auth_repository.dart';
-import 'features/authentication/presentation/bloc/authentication_bloc.dart';
 import 'features/authentication/presentation/cubit/auth_cubit.dart';
 import 'features/home/presentasion/pages/home_main.dart';
 import 'features/language/presentation/bloc/language_bloc.dart';
 import 'features/login/presentation/pages/login_page.dart';
 import 'features/splash/view/splash_page.dart';
-import 'utils/colors.dart';
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);

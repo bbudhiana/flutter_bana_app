@@ -23,7 +23,7 @@ class SerchField extends StatelessWidget {
             enabledBorder: InputBorder.none,
             focusedBorder: InputBorder.none,
             hintText: "Search Product",
-            prefixIcon: Icon(Icons.search),
+            prefixIcon: const Icon(Icons.search),
             contentPadding: EdgeInsets.symmetric(
                 horizontal: getProportionateScreenWidth(20),
                 vertical: getProportionateScreenHeight(9))),

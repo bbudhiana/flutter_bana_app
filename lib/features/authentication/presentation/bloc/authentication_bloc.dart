@@ -1,17 +1,13 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bana_app/features/authentication/domain/usecase/get_status.dart';
 import 'package:flutter_bana_app/features/authentication/domain/usecase/log_out.dart';
 import '/features/user/domain/usecases/get_current_user.dart';
 
 import '../../../user/domain/entities/user.dart';
-import '../../../user/domain/repositories/user_repository.dart';
-import '../../../user/presentation/bloc/user_bloc.dart';
 import '../../domain/entities/auth.dart';
-import '../../domain/repositories/auth_repository.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';

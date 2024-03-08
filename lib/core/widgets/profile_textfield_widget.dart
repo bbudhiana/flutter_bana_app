@@ -82,7 +82,7 @@ class ProfileTextFieldWidget<T> extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        Align(
+        const Align(
           alignment: Alignment.centerLeft,
           /* child: invalid! || validatorType == ComparePassword.invalid
               ? Text(

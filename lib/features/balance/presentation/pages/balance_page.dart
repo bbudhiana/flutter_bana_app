@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '/features/authentication/presentation/cubit/auth_cubit.dart';
 import '../../../../size_config.dart';
-import '../../../authentication/presentation/bloc/authentication_bloc.dart';
 import '../../../home/presentasion/pages/components/home_header.dart';
 import '../../../home/presentasion/pages/components/info_balance.dart';
 

@@ -13,6 +13,7 @@ class Email extends FormzInput<String, EmailValidationError> {
     if (value!.isEmpty) {
       return EmailValidationError.empty;
     }
+    return null;
 
     //return _emailRegExp.hasMatch(value) ? null : EmailValidationError.invalid;
   }
