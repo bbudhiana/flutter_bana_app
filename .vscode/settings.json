@@ -6,5 +6,5 @@
   "files.watcherExclude": {
     "**/.fvm": true
   },
-  "dart.flutterSdkPath": "/home/bahaso/fvm/cache/3.19.2"
+  "dart.flutterSdkPath": "/home/bahaso/fvm/cache/3.19.3"
 }
