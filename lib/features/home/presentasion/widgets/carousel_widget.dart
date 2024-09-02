@@ -12,7 +12,7 @@ class CarouselWidget extends StatefulWidget {
 }
 
 class _CarouselWidgetState extends State<CarouselWidget> {
-  final CarouselController _controller = CarouselController();
+  final CarouselSliderController _controller = CarouselSliderController();
 
   final controller = PageController(viewportFraction: 0.8, keepPage: true);
 
@@ -57,10 +57,7 @@ class _CarouselWidgetState extends State<CarouselWidget> {
           activeIndex: _slideIndex,
           count: pages.length,
           effect: const ExpandingDotsEffect(
-              dotHeight: 13,
-              dotWidth: 13,
-              activeDotColor: SharedColors.homerBankPrimaryColor,
-              dotColor: SharedColors.homerBankGreyColor),
+              dotHeight: 13, dotWidth: 13, activeDotColor: SharedColors.homerBankPrimaryColor, dotColor: SharedColors.homerBankGreyColor),
         )
       ],
     );
