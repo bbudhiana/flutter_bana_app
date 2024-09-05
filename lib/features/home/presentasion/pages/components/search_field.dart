@@ -4,7 +4,7 @@ import '../../../../../constants.dart';
 import '../../../../../size_config.dart';
 
 class SerchField extends StatelessWidget {
-  const SerchField({Key? key}) : super(key: key);
+  const SerchField({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +24,7 @@ class SerchField extends StatelessWidget {
             focusedBorder: InputBorder.none,
             hintText: "Search Product",
             prefixIcon: const Icon(Icons.search),
-            contentPadding: EdgeInsets.symmetric(
-                horizontal: getProportionateScreenWidth(20),
-                vertical: getProportionateScreenHeight(9))),
+            contentPadding: EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20), vertical: getProportionateScreenHeight(9))),
       ),
     );
   }

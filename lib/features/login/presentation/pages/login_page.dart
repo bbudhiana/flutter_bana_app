@@ -22,7 +22,7 @@ class LoginPage extends StatefulWidget {
     return MaterialPageRoute<void>(builder: (_) => const LoginPage());
   }
 
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();

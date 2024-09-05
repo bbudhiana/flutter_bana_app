@@ -3,14 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:formz/formz.dart';
 
-import '/features/login/presentation/bloc/login/login_bloc.dart';
-import '/features/login/presentation/models/models.dart';
 import '../../../../utils/colors.dart';
 import '../../../../utils/images.dart';
 import '../../../home/presentasion/pages/home_main.dart';
+import '/features/login/presentation/bloc/login/login_bloc.dart';
+import '/features/login/presentation/models/models.dart';
 
 class LoginWidget extends StatelessWidget {
-  const LoginWidget({Key? key}) : super(key: key);
+  const LoginWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +68,7 @@ class LoginWidget extends StatelessWidget {
 }
 
 class _EmailInput extends StatelessWidget {
-  const _EmailInput({Key? key}) : super(key: key);
+  const _EmailInput({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -164,7 +164,7 @@ class _EmailInput extends StatelessWidget {
 }
 
 class _PasswordInput extends StatelessWidget {
-  const _PasswordInput({Key? key}) : super(key: key);
+  const _PasswordInput({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -269,7 +269,7 @@ class _PasswordInput extends StatelessWidget {
 }
 
 class _LoginButton extends StatelessWidget {
-  const _LoginButton({Key? key}) : super(key: key);
+  const _LoginButton({super.key});
 
   @override
   Widget build(BuildContext context) {

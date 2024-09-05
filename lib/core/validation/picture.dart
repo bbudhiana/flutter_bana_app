@@ -4,7 +4,7 @@ enum PictureValidationError { empty }
 
 class Picture extends FormzInput<String, PictureValidationError> {
   const Picture.pure() : super.pure('');
-  const Picture.dirty([String value = '']) : super.dirty(value);
+  const Picture.dirty([super.value = '']) : super.dirty();
 
   @override
   PictureValidationError? validator(String? value) {

@@ -8,7 +8,7 @@ import '../../presentation/bloc/weather_state.dart';
 class WeatherPage extends StatelessWidget {
   static const String route = "weather_page";
 
-  const WeatherPage({Key? key}) : super(key: key);
+  const WeatherPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -119,10 +119,7 @@ class WeatherPage extends StatelessWidget {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
                                   state.result.pressure.toString(),
-                                  style: const TextStyle(
-                                      fontSize: 16.0,
-                                      letterSpacing: 1.2,
-                                      fontWeight: FontWeight.bold),
+                                  style: const TextStyle(fontSize: 16.0, letterSpacing: 1.2, fontWeight: FontWeight.bold),
                                 ),
                               ), // Will be change later
                             ]),

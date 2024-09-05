@@ -8,12 +8,12 @@ class SharedSafeAreaWidget extends StatelessWidget {
   final bool bottom;
 
   const SharedSafeAreaWidget({
-    Key? key,
+    super.key,
     required this.child,
     this.color = SharedColors.homerBankPrimaryColor,
     this.top = false,
     this.bottom = true,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

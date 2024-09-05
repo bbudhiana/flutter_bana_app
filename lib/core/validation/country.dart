@@ -4,7 +4,7 @@ enum CountryValidationError { empty }
 
 class Country extends FormzInput<String, CountryValidationError> {
   const Country.pure() : super.pure('');
-  const Country.dirty([String value = '']) : super.dirty(value);
+  const Country.dirty([super.value = '']) : super.dirty();
 
   @override
   CountryValidationError? validator(String? value) {

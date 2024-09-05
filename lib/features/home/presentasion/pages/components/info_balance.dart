@@ -8,8 +8,8 @@ import '../../../../authentication/presentation/cubit/auth_cubit.dart';
 
 class InfoBalance extends StatelessWidget {
   const InfoBalance({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

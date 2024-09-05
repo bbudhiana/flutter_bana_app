@@ -4,7 +4,7 @@ enum UsernameValidationError { empty, invalid }
 
 class UserName extends FormzInput<String, UsernameValidationError> {
   const UserName.pure() : super.pure('');
-  const UserName.dirty([String value = '']) : super.dirty(value);
+  const UserName.dirty([super.value = '']) : super.dirty();
   static final containsUppercase = RegExp(r'[A-Z]');
 
   @override
@@ -12,8 +12,6 @@ class UserName extends FormzInput<String, UsernameValidationError> {
     if (value!.isEmpty) {
       return UsernameValidationError.empty;
     }
-    return containsUppercase.hasMatch(value)
-        ? null
-        : UsernameValidationError.invalid;
+    return containsUppercase.hasMatch(value) ? null : UsernameValidationError.invalid;
   }
 }

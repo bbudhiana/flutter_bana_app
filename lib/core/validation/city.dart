@@ -4,7 +4,7 @@ enum CityValidationError { empty }
 
 class City extends FormzInput<String, CityValidationError> {
   const City.pure() : super.pure('');
-  const City.dirty([String value = '']) : super.dirty(value);
+  const City.dirty([super.value = '']) : super.dirty();
 
   @override
   CityValidationError? validator(String? value) {
