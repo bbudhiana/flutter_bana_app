@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bana_app/utils/simple_observer.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'app.dart';
@@ -12,6 +14,9 @@ void main() async {
 
   // Keep native splash screen up until app is finished bootstrapping
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
+  //Logger
+  Bloc.observer = MyBlocObserver();
 
   //TEST
   //final DbHelper helper = DbHelper();

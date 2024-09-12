@@ -68,7 +68,7 @@ class LoginWidget extends StatelessWidget {
 }
 
 class _EmailInput extends StatelessWidget {
-  const _EmailInput({super.key});
+  const _EmailInput();
 
   @override
   Widget build(BuildContext context) {
@@ -164,7 +164,7 @@ class _EmailInput extends StatelessWidget {
 }
 
 class _PasswordInput extends StatelessWidget {
-  const _PasswordInput({super.key});
+  const _PasswordInput();
 
   @override
   Widget build(BuildContext context) {
@@ -269,7 +269,7 @@ class _PasswordInput extends StatelessWidget {
 }
 
 class _LoginButton extends StatelessWidget {
-  const _LoginButton({super.key});
+  const _LoginButton();
 
   @override
   Widget build(BuildContext context) {

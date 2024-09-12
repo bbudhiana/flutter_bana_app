@@ -12,8 +12,7 @@ import '../../domain/entities/auth.dart';
 part 'authentication_event.dart';
 part 'authentication_state.dart';
 
-class AuthenticationBloc
-    extends Bloc<AuthenticationEvent, AuthenticationState> {
+class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
   AuthenticationBloc(
     GetStatus getStatus,
     GetCurrentUser getCurrentUser,
@@ -29,9 +28,7 @@ class AuthenticationBloc
     //default ketika pertama kali bloc digunakan, yaitu set stream status state
     //AuthenticationStatusChanged hanya di trigger dari perubahan value _authenticationRepository.status
     //_authenticationStatusSubscription = _authenticationRepository.status.listen((status) => add(_AuthenticationStatusChanged(status)));
-    _authenticationStatusSubscription = _getStatus
-        .execute()
-        .listen((status) => add(_AuthenticationStatusChanged(status)));
+    _authenticationStatusSubscription = _getStatus.execute().listen((status) => add(_AuthenticationStatusChanged(status)));
   }
   final GetStatus _getStatus;
   final GetCurrentUser _getCurrentUser;
@@ -40,8 +37,7 @@ class AuthenticationBloc
   final UserRepository _userRepository; */
 
   //dibuat late karena baru bisa diinisiasi setelah dapat status nya di _authenticationRepository.status
-  late StreamSubscription<AuthenticationStatus>
-      _authenticationStatusSubscription;
+  late StreamSubscription<AuthenticationStatus> _authenticationStatusSubscription;
 
   //method ini di override karena saat bloc tidak lagi digunakan akan ada proses
   //yaitu proses menutup seluruh subscription event dari authenticationstatus
@@ -68,11 +64,11 @@ class AuthenticationBloc
             ? AuthenticationState.authenticated(user)
             : const AuthenticationState.unauthenticated()); */
         user.fold((failure) {
-          emit(const AuthenticationState.unauthenticated());
+          return emit(const AuthenticationState.unauthenticated());
         }, (data) {
-          emit(AuthenticationState.authenticated(data));
+          return emit(AuthenticationState.authenticated(data));
         });
-        break;
+      //break;
       case AuthenticationStatus.unknown:
         return emit(const AuthenticationState.unknown());
     }

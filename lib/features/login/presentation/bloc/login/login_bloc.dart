@@ -38,6 +38,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(state.copyWith(
       name: name,
       isValid: Formz.validate([state.password, name]),
+      status: FormzSubmissionStatus.initial,
     ));
   }
 
@@ -49,6 +50,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(state.copyWith(
       password: password,
       isValid: Formz.validate([password, state.name]),
+      status: FormzSubmissionStatus.initial,
     ));
   }
 

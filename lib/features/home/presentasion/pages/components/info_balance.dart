@@ -5,6 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../size_config.dart';
 import '../../../../authentication/presentation/cubit/auth_cubit.dart';
+import '../../../../authentication/presentation/bloc/authentication_bloc.dart';
 
 class InfoBalance extends StatelessWidget {
   const InfoBalance({
@@ -30,10 +31,12 @@ class InfoBalance extends StatelessWidget {
       ),
       child: Builder(builder: (context) {
         final userName = context.select(
-          (AuthCubit cubit) => cubit.state.user.name,
+          //(AuthCubit cubit) => cubit.state.user.name,
+          (AuthenticationBloc bloc) => bloc.state.user.name,
         );
         final userAmount = context.select(
-          (AuthCubit cubit) => cubit.state.user.amount,
+          //(AuthCubit cubit) => cubit.state.user.amount,
+          (AuthenticationBloc bloc) => bloc.state.user.amount,
         );
         return Column(
           //mainAxisAlignment: MainAxisAlignment.spaceEvenly,

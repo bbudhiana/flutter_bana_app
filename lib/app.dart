@@ -6,6 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'config/app_theme.dart';
 import 'features/authentication/domain/entities/auth.dart';
 import 'features/authentication/domain/repositories/auth_repository.dart';
+import 'features/authentication/presentation/bloc/authentication_bloc.dart';
 import 'features/authentication/presentation/cubit/auth_cubit.dart';
 import 'features/home/presentasion/pages/home_main.dart';
 import 'features/language/presentation/bloc/language_bloc.dart';
@@ -51,13 +52,17 @@ class _AppState extends State<App> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => GetIt.I<AuthCubit>(),
+          //create: (_) => GetIt.I<AuthCubit>(),
+          create: (_) => GetIt.I<AuthenticationBloc>(),
         ),
+        // BlocProvider(
+        //   create: (_) => GetIt.I<AuthCubit>(),
+        // ),
         BlocProvider(
           create: (context) => GetIt.I<LanguageBloc>(),
         ),
       ],
-      child: const AppView(),
+      child: const _AppView(),
     );
   }
   /* Widget build(BuildContext context) {
@@ -78,14 +83,14 @@ class _AppState extends State<App> {
   } */
 }
 
-class AppView extends StatefulWidget {
-  const AppView({super.key});
+class _AppView extends StatefulWidget {
+  const _AppView();
 
   @override
-  State<AppView> createState() => _AppViewState();
+  State<_AppView> createState() => _AppViewState();
 }
 
-class _AppViewState extends State<AppView> {
+class _AppViewState extends State<_AppView> {
   final _navigatorKey = GlobalKey<NavigatorState>();
 
   NavigatorState get _navigator => _navigatorKey.currentState!;
@@ -110,8 +115,8 @@ class _AppViewState extends State<AppView> {
           supportedLocales: AppLocalizations.supportedLocales,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           builder: (context, child) {
-            //return BlocListener<AuthenticationBloc, AuthenticationState>(
-            return BlocListener<AuthCubit, AuthState>(
+            return BlocListener<AuthenticationBloc, AuthenticationState>(
+              //return BlocListener<AuthCubit, AuthState>(
               listener: (context, state) {
                 print(state.status);
                 switch (state.status) {

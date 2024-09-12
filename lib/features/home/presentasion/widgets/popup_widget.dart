@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../authentication/presentation/bloc/authentication_bloc.dart';
 import '/features/authentication/presentation/cubit/auth_cubit.dart';
 import '../../../../utils/colors.dart';
 
@@ -72,8 +73,8 @@ class _PopupMenuWidgetState extends State<PopupMenuWidget> {
 }
 
 void _logOut(BuildContext context) {
-  //context.read<AuthenticationBloc>().add(AuthenticationLogoutRequested());
-  context.read<AuthCubit>().logOutRequest(); //shortcut
+  context.read<AuthenticationBloc>().add(AuthenticationLogoutRequested());
+  //context.read<AuthCubit>().logOutRequest(); //shortcut
   //BlocProvider.of<AuthCubit>(context).logOutRequest(); //Official
 }
 
@@ -112,8 +113,7 @@ class TooltipShape extends ShapeBorder {
     path.lineTo(rrect.width - 10, 0);
     path.quadraticBezierTo(rrect.width, 0, rrect.width, 10);
     path.lineTo(rrect.width, rrect.height - 10);
-    path.quadraticBezierTo(
-        rrect.width, rrect.height, rrect.width - 10, rrect.height);
+    path.quadraticBezierTo(rrect.width, rrect.height, rrect.width - 10, rrect.height);
     path.lineTo(10, rrect.height);
     path.quadraticBezierTo(0, rrect.height, 0, rrect.height - 10);
 
