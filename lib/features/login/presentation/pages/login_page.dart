@@ -67,7 +67,8 @@ class _LoginPageState extends State<LoginPage> {
                           //Navigator.of(context).pop();
                           //context.pushNamed(AppRouteConstant.loginRoute);
                           //Future.delayed(const Duration(milliseconds: 300)).then((value) => Navigator.of(context, rootNavigator: true).pop());
-                          Future.delayed(const Duration(milliseconds: 300)).then((value) => Navigator.pop(context));
+                          Future.delayed(const Duration(milliseconds: 300))
+                              .then((value) => Navigator.pop(context));
                           //Future.delayed(const Duration(milliseconds: 300)).then((value) => context.pop());
                           //Future.delayed(const Duration(milliseconds: 300)).then((value) => context.pushNamed(AppRouteConstant.loginRoute));
                           /* Future.delayed(const Duration(milliseconds: 300)).then((value) {
@@ -82,19 +83,26 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         title: Text(Language.values[index].text),
-                        trailing: Language.values[index] == state.selectedLanguage
-                            ? const Icon(
-                                Icons.check_circle_rounded,
-                                color: SharedColors.homerBankPrimaryColor,
-                              )
-                            : null,
+                        trailing:
+                            Language.values[index] == state.selectedLanguage
+                                ? const Icon(
+                                    Icons.check_circle_rounded,
+                                    color: SharedColors.homerBankPrimaryColor,
+                                  )
+                                : null,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
                           side: Language.values[index] == state.selectedLanguage
-                              ? const BorderSide(color: SharedColors.homerBankPrimaryColor, width: 1.5)
+                              ? const BorderSide(
+                                  color: SharedColors.homerBankPrimaryColor,
+                                  width: 1.5)
                               : BorderSide(color: Colors.grey[300]!),
                         ),
-                        tileColor: Language.values[index] == state.selectedLanguage ? SharedColors.homerBankPrimaryColor.withOpacity(0.05) : null,
+                        tileColor:
+                            Language.values[index] == state.selectedLanguage
+                                ? SharedColors.homerBankPrimaryColor
+                                    .withOpacity(0.05)
+                                : null,
                       );
                     },
                     separatorBuilder: (context, index) {
@@ -119,7 +127,7 @@ class _LoginPageState extends State<LoginPage> {
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
           centerTitle: false,
-          title: Assets.images.homerBank.image(height: 32.0),
+          title: Assets.images.homerBank.image(height: 22.0),
           actions: [
             Padding(
               padding: const EdgeInsets.symmetric(
@@ -127,7 +135,8 @@ class _LoginPageState extends State<LoginPage> {
                 vertical: 8.0,
               ),
               child: OutlinedButton(
-                onPressed: () => showLanguageBottomSheet(context), // #2 Function call
+                onPressed: () =>
+                    showLanguageBottomSheet(context), // #2 Function call
                 style: OutlinedButton.styleFrom(
                   padding: const EdgeInsets.all(8.0),
                   foregroundColor: SharedColors.homerBankGreyColor,
@@ -166,14 +175,15 @@ class _LoginPageState extends State<LoginPage> {
                 alignment: Alignment.center,
                 child: SingleChildScrollView(
                   child: BlocProvider(
-                    create: (context) {
+                    /*create: (context) {
                       /* return LoginBloc(
                         authRepository:
                             RepositoryProvider.of<AuthRepository>(context),
                       ); */
                       //return LoginBloc(RepositoryProvider.of<LogIn>(context));
                       return GetIt.I<LoginBloc>();
-                    },
+                    },*/
+                    create: (context) => GetIt.I<LoginBloc>(),
                     child: const LoginWidget(),
                     //child: const Text('test'),
                   ),

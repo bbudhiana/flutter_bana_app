@@ -49,7 +49,8 @@ class LoginWidget extends StatelessWidget {
             margin: const EdgeInsets.only(left: 10, right: 10),
             padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 14),
             height: 368,
-            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12.0)),
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(12.0)),
             child: const Column(
               children: [
                 _EmailInput(),
@@ -87,7 +88,9 @@ class _EmailInput extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                   //color: state.name.invalid
                   //color: state.name.isNotValid ? SharedColors.homerBankDangerColor : Colors.black,
-                  color: state.name.displayError != null ? SharedColors.homerBankDangerColor : Colors.black,
+                  color: state.name.displayError != null
+                      ? SharedColors.homerBankDangerColor
+                      : Colors.black,
                 ),
               ),
             ),
@@ -98,30 +101,43 @@ class _EmailInput extends StatelessWidget {
               borderRadius: BorderRadius.circular(8.0),
               child: TextField(
                 key: const Key('loginForm_NameInput_textField'),
-                onChanged: (name) => context.read<LoginBloc>().add(LoginNameChanged(name)),
+                onChanged: (name) =>
+                    context.read<LoginBloc>().add(LoginNameChanged(name)),
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: SharedColors.homerBankWhiteColor,
                   hintText: "alice or bob",
-                  hintStyle: const TextStyle(color: SharedColors.homerBankGreyColor, fontSize: 14, fontWeight: FontWeight.w400),
-                  contentPadding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+                  hintStyle: const TextStyle(
+                      color: SharedColors.homerBankGreyColor,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400),
+                  contentPadding: const EdgeInsets.symmetric(
+                      vertical: 12.0, horizontal: 16.0),
                   border: OutlineInputBorder(
                     //borderSide: state.name.invalid
                     //borderSide: state.name.isNotValid ? const BorderSide(color: SharedColors.homerBankDangerColor, width: 2.0) : BorderSide.none,
-                    borderSide:
-                        state.name.displayError != null ? const BorderSide(color: SharedColors.homerBankDangerColor, width: 2.0) : BorderSide.none,
+                    borderSide: state.name.displayError != null
+                        ? const BorderSide(
+                            color: SharedColors.homerBankDangerColor,
+                            width: 2.0)
+                        : BorderSide.none,
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   enabledBorder: OutlineInputBorder(
                     //borderSide: state.name.invalid
                     //borderSide: state.name.isNotValid
                     borderSide: state.name.displayError != null
-                        ? const BorderSide(color: SharedColors.homerBankDangerColor, width: 2.0)
-                        : const BorderSide(color: SharedColors.homerBankWhiteColor, width: 1.0),
+                        ? const BorderSide(
+                            color: SharedColors.homerBankDangerColor,
+                            width: 2.0)
+                        : const BorderSide(
+                            color: SharedColors.homerBankWhiteColor,
+                            width: 1.0),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: SharedColors.homerBankPrimaryColor, width: 1.0),
+                    borderSide: const BorderSide(
+                        color: SharedColors.homerBankPrimaryColor, width: 1.0),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   // errorText:
@@ -137,12 +153,16 @@ class _EmailInput extends StatelessWidget {
               child: Text(
                 //state.name.invalid ? _getErrorName(state.name.error) : '',
                 //state.name.isNotValid ? _getErrorName(state.name.error) : '',
-                state.name.displayError != null ? _getErrorName(state.name.error) : '',
+                state.name.displayError != null
+                    ? _getErrorName(state.name.error)
+                    : '',
                 style: TextStyle(
                   fontSize: 10,
                   //color: state.name.invalid
                   //color: state.name.isNotValid ? SharedColors.homerBankDangerColor : Colors.green,
-                  color: state.name.displayError != null ? SharedColors.homerBankDangerColor : Colors.green,
+                  color: state.name.displayError != null
+                      ? SharedColors.homerBankDangerColor
+                      : Colors.green,
                 ),
               ),
             ),
@@ -170,7 +190,9 @@ class _PasswordInput extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return BlocBuilder<LoginBloc, LoginState>(
-      buildWhen: (previous, current) => previous.password != current.password || previous.visibility != current.visibility,
+      buildWhen: (previous, current) =>
+          previous.password != current.password ||
+          previous.visibility != current.visibility,
       builder: (context, state) {
         return Column(
           children: [
@@ -183,7 +205,9 @@ class _PasswordInput extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                   //color: state.password.invalid
                   //color: state.password.isNotValid ? SharedColors.homerBankDangerColor : Colors.black,
-                  color: state.password.displayError != null ? SharedColors.homerBankDangerColor : Colors.black,
+                  color: state.password.displayError != null
+                      ? SharedColors.homerBankDangerColor
+                      : Colors.black,
                 ),
               ),
             ),
@@ -194,19 +218,25 @@ class _PasswordInput extends StatelessWidget {
               borderRadius: BorderRadius.circular(8.0),
               child: TextField(
                 key: const Key('loginForm_passwordInput_textField'),
-                onChanged: (password) => context.read<LoginBloc>().add(LoginPasswordChanged(password)),
+                onChanged: (password) => context
+                    .read<LoginBloc>()
+                    .add(LoginPasswordChanged(password)),
                 obscureText: !state.visibility,
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white70,
                   hintText: "alice123 or bob123",
-                  hintStyle: const TextStyle(color: SharedColors.homerBankGreyColor, fontSize: 14),
-                  contentPadding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+                  hintStyle: const TextStyle(
+                      color: SharedColors.homerBankGreyColor, fontSize: 14),
+                  contentPadding: const EdgeInsets.symmetric(
+                      vertical: 12.0, horizontal: 16.0),
                   border: OutlineInputBorder(
                     //borderSide: state.password.invalid
                     //borderSide: state.password.isNotValid ? const BorderSide(color: SharedColors.homerBankDangerColor, width: 2.0) : BorderSide.none,
                     borderSide: state.password.displayError != null
-                        ? const BorderSide(color: SharedColors.homerBankDangerColor, width: 2.0)
+                        ? const BorderSide(
+                            color: SharedColors.homerBankDangerColor,
+                            width: 2.0)
                         : BorderSide.none,
                     borderRadius: BorderRadius.circular(8.0),
                   ),
@@ -214,17 +244,26 @@ class _PasswordInput extends StatelessWidget {
                     //borderSide: state.password.invalid
                     //borderSide: state.password.isNotValid
                     borderSide: state.password.displayError != null
-                        ? const BorderSide(color: SharedColors.homerBankDangerColor, width: 2.0)
-                        : const BorderSide(color: SharedColors.homerBankWhiteColor, width: 1.0),
+                        ? const BorderSide(
+                            color: SharedColors.homerBankDangerColor,
+                            width: 2.0)
+                        : const BorderSide(
+                            color: SharedColors.homerBankWhiteColor,
+                            width: 1.0),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: SharedColors.homerBankPrimaryColor, width: 1.0),
+                    borderSide: const BorderSide(
+                        color: SharedColors.homerBankPrimaryColor, width: 1.0),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   suffixIcon: InkWell(
-                    onTap: () => context.read<LoginBloc>().add(VisibilityPasswordChanged(!state.visibility)),
-                    child: Icon(state.visibility == true ? Icons.visibility_off : Icons.visibility),
+                    onTap: () => context
+                        .read<LoginBloc>()
+                        .add(VisibilityPasswordChanged(!state.visibility)),
+                    child: Icon(state.visibility == true
+                        ? Icons.visibility_off
+                        : Icons.visibility),
                   ),
                   // errorText: state.password.invalid
                   //     ? _getErrorPassword(state.password.error)
@@ -240,12 +279,16 @@ class _PasswordInput extends StatelessWidget {
               child: Text(
                 //state.password.invalid
                 //state.password.isNotValid ? _getErrorPassword(state.password.error) : '',
-                state.password.displayError != null ? _getErrorPassword(state.password.error) : '',
+                state.password.displayError != null
+                    ? _getErrorPassword(state.password.error)
+                    : '',
                 style: TextStyle(
                   fontSize: 10,
                   //color: state.password.invalid
                   //color: state.password.isNotValid ? SharedColors.homerBankDangerColor : Colors.green,
-                  color: state.password.displayError != null ? SharedColors.homerBankDangerColor : Colors.green,
+                  color: state.password.displayError != null
+                      ? SharedColors.homerBankDangerColor
+                      : Colors.green,
                 ),
               ),
             ),

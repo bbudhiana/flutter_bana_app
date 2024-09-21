@@ -18,7 +18,6 @@ enum Language {
   const Language(this.value, this.image, this.text);
 
   final Locale value;
-  final AssetGenImage
-      image; // Optional: this properties used for ListTile details
+  final AssetGenImage image; // Optional: this properties used for ListTile details
   final String text; // Optional: this properties used for ListTile details
 }
