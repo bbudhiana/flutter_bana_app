@@ -5,5 +5,9 @@
   "username": "Username",
   "password": "Password",
   "login": "Login",
-  "chooseLanguage":"Choose Preference Language"
+  "chooseLanguage":"Choose Preference Language",
+  "helloWorld": "Hello World!",
+  "@helloWorld": {
+    "description": "The conventional newborn programmer greeting"
+  }
 }

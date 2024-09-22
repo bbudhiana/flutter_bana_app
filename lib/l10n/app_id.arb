@@ -5,5 +5,9 @@
   "username": "Nama user",
   "password": "Sandi",
   "login": "Masuk",
-  "chooseLanguage":"Pilih Preferensi Bahasa"
+  "chooseLanguage":"Pilih Preferensi Bahasa",
+  "helloWorld": "Halo Dunia!",
+  "@helloWorld": {
+    "description": "Selamat Datang Standard dari program"
+  }
 }
